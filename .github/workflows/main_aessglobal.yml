@@ -60,4 +60,4 @@ jobs:
           app-name: 'aessglobal'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DA8330B0D1D44FE8A484A341170A4554 }}
-          package: .
+          package: release.zip
