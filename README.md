@@ -1,89 +1,70 @@
-# aess-websiteofficial
-Official Website for AESS; A company specializing in the design, development of custom software applications.
+# Getting Started with Create React App
 
-# AESS - Advanced Engineering for Software Solutions
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-AESS is a company specializing in the design, development, and innovation of custom software applications and technological solutions. This repository contains the source code for the AESS website, built using the MERN stack (MongoDB, Express, React, and Node.js) and deployed on Microsoft Azure.
+## Available Scripts
 
-## Table of Contents
+In the project directory, you can run:
 
-1. [Project Structure](#project-structure)
-2. [Requirements](#requirements)
-3. [Setup](#setup)
-4. [Development](#development)
-5. [Deployment](#deployment)
+### `npm start`
 
-## Project Structure
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The project is divided into two main folders:
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-- `backend`: Contains the Express.js server and API code.
-- `frontend`: Contains the React.js application code for the client-side.
+### `npm test`
 
-## Requirements
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-- Node.js (version 14 or later)
-- npm (included with Node.js)
+### `npm run build`
 
-## Setup
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-1. Clone the repository: 
-    - git clone https://github.com/yourusername/aess-website.git
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-2. Navigate to the project folder: 
-    - cd aess-website
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-3. Install dependencies for the backend: 
-    - cd backend
-    - npm install
-    
-4. Install dependencies for the frontend:
-    - cd ../frontend
-    - npm install
+### `npm run eject`
 
-## Development
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-1. Start the backend server:
-    - cd backend
-    - node server.js
-    - The server will run on `http://localhost:5000`.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-2. Start the frontend development server:
-    - cd frontend
-    - npm start
-    - The frontend application will run on `http://localhost:3000`.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-## Deployment
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-To deploy the AESS website on Microsoft Azure, follow the official documentation on deploying Node.js applications: [Azure App Service - Quickstart: Create a Node.js web app](https://docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs?tabs=linux&pivots=development-environment-cli)
+## Learn More
 
-## License
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-This project is licensed under the [MIT License](LICENSE).
+To learn React, check out the [React documentation](https://reactjs.org/).
 
+### Code Splitting
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
---TODO
+### Analyzing the Bundle Size
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-Now you have the main structure and navigation for your website. To continue development, you'll need to create the content for each page based on the information provided in the business plan.
+### Making a Progressive Web App
 
-Here's a brief outline of what each page should include:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-1. **Home**: An overview of the company, its mission, and its services. You could use a banner with a call-to-action, a brief introduction to the company, and a section highlighting key services or recent projects.
-2. **About Us**: Detailed information about the company's background, its values, and its team. You may also include the story behind the company name and the company's competitive advantages.
-3. **Services**: A comprehensive list of services offered by the company, with explanations and examples of each. You can divide this into categories such as consulting, custom software development, and digital transformation.
-4. **Portfolio**: Showcase completed projects, ideally with images and brief descriptions of the project's scope, technologies used, and client testimonials. You can organize this as a grid or a slideshow.
-5. **Blog**: A collection of articles related to the software industry, company news, and other relevant topics. You may use this space to demonstrate the company's expertise and share insights on trends and best practices.
-6. **Contact Us**: A contact form allowing visitors to get in touch with the company. Include fields for name, email, phone number, and message. You can also provide the company's contact information, such as email, phone number, and address.
+### Advanced Configuration
 
-To style the website, you can use a CSS framework like Bootstrap or create your own custom styles. For the backend, you can develop API endpoints to manage blog posts, portfolio projects, and contact form submissions, and store the data in a MongoDB database.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-Once the development of the website is complete, you can proceed with testing, deploying the site on Azure, and making it live for your clients to access.
+### Deployment
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
+### `npm run build` fails to minify
 
-
-
-
-
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
