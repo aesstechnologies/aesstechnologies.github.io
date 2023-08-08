@@ -24,7 +24,7 @@ const ContactPage = () => {
     }
   
     try {
-      await axios.post('http://localhost:5000/send-email', { name, email, message });
+      await axios.post('http://localhost:5000/api/email/post-email', { name, email, message });
       alert('Email sent successfully');
     } catch (error) {
       alert(error.response.data.message || 'Error sending email');
