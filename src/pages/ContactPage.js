@@ -2,22 +2,37 @@ import React from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import axios from 'axios';
 
-const handleSubmit = async (event) => {
-  event.preventDefault();
-
-  const name = event.target.formName.value;
-  const email = event.target.formEmail.value;
-  const message = event.target.formMessage.value;
-
-  try {
-    await axios.post('/send-email', { name, email, message });
-    alert('Email sent successfully');
-  } catch (error) {
-    alert('Error sending email');
-  }
-};
-
 const ContactPage = () => {
+  const [loading, setLoading] = React.useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+  
+    const name = event.target.formName.value;
+    const email = event.target.formEmail.value;
+    const message = event.target.formMessage.value;
+  
+    if (!name || !email || !message) {
+      alert('All fields are required!');
+      return;
+    }
+    
+    if (!email.includes('@')) {
+      alert('Please enter a valid email address!');
+      return;
+    }
+  
+    try {
+      await axios.post('http://localhost:5000/send-email', { name, email, message });
+      alert('Email sent successfully');
+    } catch (error) {
+      alert(error.response.data.message || 'Error sending email');
+    }
+  
+    setLoading(false);
+  };
+
   return (
     <Container>
       <Row className="my-5">
@@ -41,8 +56,8 @@ const ContactPage = () => {
               <Form.Label>Message</Form.Label>
               <Form.Control as="textarea" rows={3} placeholder="Your Message" />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Send Message
+            <Button variant="primary" type="submit" disabled={loading}>
+              {loading ? 'Sending...' : 'Send Message'}
             </Button>
           </Form>
         </Col>
@@ -71,9 +86,9 @@ const ContactPage = () => {
             width="100%"
             height="450"
             style={{ border: 0 }}
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </Col>
       </Row>
