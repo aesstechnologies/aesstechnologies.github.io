@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
-import { useSearchParams, useNavigate, Link } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,7 +10,6 @@ import { faCheckCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
  */
 const CheckoutSuccessPage = () => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const sessionId = searchParams.get('session_id');
   const [loading, setLoading] = useState(true);
 

@@ -62,9 +62,11 @@ export const trackPageView = () => {
   }
 };
 
-export default {
+const analyticsService = {
   initPlausible,
   trackEvent,
   trackPageView,
 };
+
+export default analyticsService;
 

@@ -51,7 +51,7 @@ const MailchimpForm = () => {
       const formData = new FormData();
       formData.append('EMAIL', email);
 
-      const response = await fetch(mailchimpUrl, {
+      await fetch(mailchimpUrl, {
         method: 'POST',
         body: formData,
         mode: 'no-cors', // Mailchimp forms typically use no-cors

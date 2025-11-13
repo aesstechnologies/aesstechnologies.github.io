@@ -198,7 +198,7 @@ export const transitions = {
   slow: '300ms ease-in-out',
 };
 
-export default {
+const themeConfig = {
   themes,
   typography,
   spacing,
@@ -207,4 +207,6 @@ export default {
   breakpoints,
   transitions,
 };
+
+export default themeConfig;
 

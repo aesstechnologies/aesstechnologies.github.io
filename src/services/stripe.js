@@ -75,8 +75,10 @@ export const redirectToCheckout = async (serviceId, amount, serviceName) => {
   }
 };
 
-export default {
+const stripeService = {
   getStripe,
   redirectToCheckout,
 };
+
+export default stripeService;
 
