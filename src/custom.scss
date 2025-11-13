@@ -160,9 +160,121 @@ body {
   
   .navbar-toggler {
     border-color: var(--color-border);
+    color: var(--color-text) !important;
     
     .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(241, 245, 249, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      // Default dark theme icon (white)
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(241, 245, 249, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  }
+  
+  // Full-screen mobile menu - only when expanded (has .show class)
+  .navbar-collapse-custom {
+    @media (max-width: 991.98px) {
+      // Default collapsed state - hidden
+      &.show {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--color-surface);
+        z-index: 1040;
+        padding: 4rem 2rem 2rem;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0;
+        overflow-y: auto;
+        
+        .nav {
+          flex-direction: column;
+          width: 100%;
+          max-width: 400px;
+          text-align: center;
+          gap: 0.5rem;
+          
+          .nav-link {
+            padding: 1rem 0;
+            font-size: 1.5rem;
+            width: 100%;
+            display: block;
+            color: var(--color-text) !important;
+            font-weight: 500;
+            transition: color 0.2s ease-in-out;
+            
+            &:hover,
+            &:focus {
+              color: var(--color-primary) !important;
+              background-color: transparent;
+            }
+          }
+        }
+        
+        // Center theme switcher
+        .ms-auto {
+          margin-top: 2rem;
+          width: 100%;
+          max-width: 400px;
+          justify-content: center;
+        }
+      }
+    }
+  }
+  
+  // Hide navbar brand when menu is expanded on mobile
+  @media (max-width: 991.98px) {
+    .navbar-collapse-custom.show ~ * .navbar-brand-text,
+    .navbar-collapse-custom.show ~ .navbar-brand-text {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    // Alternative: hide brand when toggle is expanded
+    .navbar-toggler-custom[aria-expanded="true"] ~ .navbar-brand-text {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease-in-out;
+    }
+  }
+  
+  // Ensure navbar toggle is visible above full-screen menu and transform to X when open
+  .navbar-toggler-custom {
+    @media (max-width: 991.98px) {
+      z-index: 1050;
+      position: relative;
+      border: none;
+      padding: 0.5rem;
+      
+      // Transform hamburger to X when menu is open
+      &[aria-expanded="true"] {
+        .navbar-toggler-icon {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(241, 245, 249, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M6 6L24 24M24 6L6 24'/%3e%3c/svg%3e");
+        }
+      }
+    }
+  }
+}
+
+// Light theme - X icon when menu is open
+.theme-light .navbar {
+  .navbar-toggler-custom {
+    @media (max-width: 991.98px) {
+      &[aria-expanded="true"] {
+        .navbar-toggler-icon {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(15, 23, 42, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M6 6L24 24M24 6L6 24'/%3e%3c/svg%3e");
+        }
+      }
+    }
+  }
+  
+  // Light theme hamburger icon (when closed)
+  .navbar-toggler {
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(15, 23, 42, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
   }
 }
