@@ -4,6 +4,7 @@ import { Container, Spinner } from 'react-bootstrap';
 
 import Navbar from './components/Navbar';
 import ErrorBoundary from './components/ErrorBoundary';
+import CircuitBackground from './components/CircuitBackground';
 import { config } from './config/env';
 import './App.css';
 
@@ -38,26 +39,35 @@ function App() {
   return (
     <ErrorBoundary>
       <Router>
+        <CircuitBackground 
+          opacity={.2} 
+          speed={.5} 
+          density={1.2}
+          floating={true}
+          verticalScroll={false}
+        />
         <Navbar />
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
-            <Route path="/checkout/cancel" element={<CheckoutCancelPage />} />
-            {config.features.enablePortfolio && PortfolioPage && (
-              <Route path="/portfolio" element={<PortfolioPage />} />
-            )}
-            {config.features.enableBlog && BlogPage && (
-              <Route path="/blog" element={<BlogPage />} />
-            )}
-            {/* 404 fallback */}
-            <Route path="*" element={<HomePage />} />
-          </Routes>
-        </Suspense>
+        <div className="main-content-wrapper">
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
+              <Route path="/checkout/cancel" element={<CheckoutCancelPage />} />
+              {config.features.enablePortfolio && PortfolioPage && (
+                <Route path="/portfolio" element={<PortfolioPage />} />
+              )}
+              {config.features.enableBlog && BlogPage && (
+                <Route path="/blog" element={<BlogPage />} />
+              )}
+              {/* 404 fallback */}
+              <Route path="*" element={<HomePage />} />
+            </Routes>
+          </Suspense>
+        </div>
       </Router>
     </ErrorBoundary>
   );

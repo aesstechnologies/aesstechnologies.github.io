@@ -4,21 +4,21 @@
  */
 
 export const themes = {
-  default: {
-    name: 'Default',
+  dark: {
+    name: 'Dark',
     colors: {
       // Primary colors
-      primary: '#1a365d',      // Deep blue - trust, professionalism
-      primaryLight: '#2c5282',
-      primaryDark: '#0f2027',
+      primary: '#3b82f6',      // Bright blue
+      primaryLight: '#60a5fa',
+      primaryDark: '#2563eb',
       
       // Secondary colors
-      secondary: '#0ea5e9',    // Teal/cyan - innovation
-      secondaryLight: '#38bdf8',
-      secondaryDark: '#0284c7',
+      secondary: '#06b6d4',    // Cyan
+      secondaryLight: '#22d3ee',
+      secondaryDark: '#0891b2',
       
       // Accent colors
-      accent: '#f97316',       // Orange - CTA buttons
+      accent: '#f97316',       // Orange
       accentLight: '#fb923c',
       accentDark: '#ea580c',
       
@@ -29,14 +29,14 @@ export const themes = {
       info: '#3b82f6',
       
       // Neutral colors
-      background: '#ffffff',
-      surface: '#f8fafc',
-      surfaceElevated: '#ffffff',
-      text: '#1e293b',
-      textSecondary: '#64748b',
+      background: '#0f172a',    // Dark slate
+      surface: '#1e293b',
+      surfaceElevated: '#334155',
+      text: '#f1f5f9',
+      textSecondary: '#cbd5e1',
       textMuted: '#94a3b8',
-      border: '#e2e8f0',
-      divider: '#cbd5e1',
+      border: '#334155',
+      divider: '#475569',
     },
   },
   
@@ -73,42 +73,6 @@ export const themes = {
       textMuted: '#94a3b8',
       border: '#e2e8f0',
       divider: '#cbd5e1',
-    },
-  },
-  
-  dark: {
-    name: 'Dark',
-    colors: {
-      // Primary colors
-      primary: '#3b82f6',      // Bright blue
-      primaryLight: '#60a5fa',
-      primaryDark: '#2563eb',
-      
-      // Secondary colors
-      secondary: '#06b6d4',    // Cyan
-      secondaryLight: '#22d3ee',
-      secondaryDark: '#0891b2',
-      
-      // Accent colors
-      accent: '#f97316',       // Orange
-      accentLight: '#fb923c',
-      accentDark: '#ea580c',
-      
-      // Status colors
-      success: '#10b981',
-      error: '#ef4444',
-      warning: '#f59e0b',
-      info: '#3b82f6',
-      
-      // Neutral colors
-      background: '#0f172a',    // Dark slate
-      surface: '#1e293b',
-      surfaceElevated: '#334155',
-      text: '#f1f5f9',
-      textSecondary: '#cbd5e1',
-      textMuted: '#94a3b8',
-      border: '#334155',
-      divider: '#475569',
     },
   },
 };

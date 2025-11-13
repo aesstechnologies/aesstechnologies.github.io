@@ -49,7 +49,7 @@ const HomePage = () => {
   ];
 
   return (
-    <Container fluid className="px-0 px-md-3">
+    <>
       <Container>
         <Row className="my-4 my-md-5">
           <Col>
@@ -62,8 +62,9 @@ const HomePage = () => {
         </Row>
       </Container>
       
+      {/* Full-width carousel */}
       <Row className="mb-4 mb-md-5">
-        <Col xs={12} className="px-0 px-md-3">
+        <Col xs={12} className="p-0">
           {!imagesLoaded && (
             <div 
               className="carousel"
@@ -97,7 +98,7 @@ const HomePage = () => {
           )}
         </Col>
       </Row>
-    </Container>
+    </>
   );
 };
 

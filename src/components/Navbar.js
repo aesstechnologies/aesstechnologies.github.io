@@ -9,7 +9,7 @@ const Navigation = () => {
   const { features } = config;
 
   return (
-    <Navbar bg="light" expand="lg" className="shadow-sm">
+    <Navbar expand="lg" className="shadow-sm fixed-top" style={{ backgroundColor: 'var(--color-surface)' }}>
       <Container>
         <Navbar.Brand as={Link} to="/" className="navbar-brand-text">
           <img src={logo} alt="AESS Logo" height="30" className="me-2" />

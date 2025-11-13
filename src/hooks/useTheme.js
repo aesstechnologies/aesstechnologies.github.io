@@ -20,8 +20,8 @@ export const useTheme = () => {
     if (envTheme && themes[envTheme]) {
       return envTheme;
     }
-    // Default fallback
-    return 'default';
+    // Default fallback to dark
+    return 'dark';
   });
 
   const theme = useMemo(() => themes[currentTheme], [currentTheme]);
@@ -50,10 +50,8 @@ export const useTheme = () => {
   };
 
   const toggleTheme = () => {
-    const themeOrder = ['default', 'light', 'dark'];
-    const currentIndex = themeOrder.indexOf(currentTheme);
-    const nextIndex = (currentIndex + 1) % themeOrder.length;
-    setTheme(themeOrder[nextIndex]);
+    // Toggle between dark and light only
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
   };
 
   return {

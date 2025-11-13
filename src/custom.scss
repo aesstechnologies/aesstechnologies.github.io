@@ -10,15 +10,15 @@ $info: #3b82f6;
 
 @import "~bootstrap/scss/bootstrap";
 
-// CSS Variables for theme support - Default theme
+// Dark theme (default)
 :root,
-.theme-default {
-  --color-primary: #1a365d;
-  --color-primaryLight: #2c5282;
-  --color-primaryDark: #0f2027;
-  --color-secondary: #0ea5e9;
-  --color-secondaryLight: #38bdf8;
-  --color-secondaryDark: #0284c7;
+.theme-dark {
+  --color-primary: #3b82f6;
+  --color-primaryLight: #60a5fa;
+  --color-primaryDark: #2563eb;
+  --color-secondary: #06b6d4;
+  --color-secondaryLight: #22d3ee;
+  --color-secondaryDark: #0891b2;
   --color-accent: #f97316;
   --color-accentLight: #fb923c;
   --color-accentDark: #ea580c;
@@ -26,14 +26,14 @@ $info: #3b82f6;
   --color-error: #ef4444;
   --color-warning: #f59e0b;
   --color-info: #3b82f6;
-  --color-background: #ffffff;
-  --color-surface: #f8fafc;
-  --color-surfaceElevated: #ffffff;
-  --color-text: #1e293b;
-  --color-textSecondary: #64748b;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-surfaceElevated: #334155;
+  --color-text: #f1f5f9;
+  --color-textSecondary: #cbd5e1;
   --color-textMuted: #94a3b8;
-  --color-border: #e2e8f0;
-  --color-divider: #cbd5e1;
+  --color-border: #334155;
+  --color-divider: #475569;
 }
 
 // Light theme
@@ -61,37 +61,27 @@ $info: #3b82f6;
   --color-divider: #cbd5e1;
 }
 
-// Dark theme
-.theme-dark {
-  --color-primary: #3b82f6;
-  --color-primaryLight: #60a5fa;
-  --color-primaryDark: #2563eb;
-  --color-secondary: #06b6d4;
-  --color-secondaryLight: #22d3ee;
-  --color-secondaryDark: #0891b2;
-  --color-accent: #f97316;
-  --color-accentLight: #fb923c;
-  --color-accentDark: #ea580c;
-  --color-success: #10b981;
-  --color-error: #ef4444;
-  --color-warning: #f59e0b;
-  --color-info: #3b82f6;
-  --color-background: #0f172a;
-  --color-surface: #1e293b;
-  --color-surfaceElevated: #334155;
-  --color-text: #f1f5f9;
-  --color-textSecondary: #cbd5e1;
-  --color-textMuted: #94a3b8;
-  --color-border: #334155;
-  --color-divider: #475569;
-}
 
 // Mobile-first base styles
 // Override Bootstrap colors with CSS variables for runtime theming
+html, body {
+  overflow-x: hidden; // Prevent horizontal scrollbar
+  max-width: 100vw; // Ensure no overflow
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-text);
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+// Main content wrapper - adds spacing below sticky navbar
+.main-content-wrapper {
+  padding-top: 4rem; // Space for sticky navbar (mobile)
+  
+  @media (min-width: 768px) {
+    padding-top: 5rem; // More space on larger screens
+  }
 }
 
 // Override Bootstrap's primary color with CSS variable
@@ -135,24 +125,55 @@ body {
   background-color: var(--color-secondary) !important;
 }
 
-// Navbar customization
-.navbar-brand-text {
-  font-size: 1rem;
-  padding-inline: 1rem;
-  font-weight: 600;
+// Navbar customization with theme support
+.navbar {
+  background-color: var(--color-surface) !important;
+  border-bottom: 1px solid var(--color-border);
+  z-index: 1030; // Ensure navbar stays above other content
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  &.sticky-top {
+    position: sticky;
+    top: 0;
+  }
+  
+  .navbar-brand-text {
+    font-size: 1rem;
+    padding-inline: 1rem;
+    font-weight: 600;
+    color: var(--color-text) !important;
+  }
+
+  .navbar-brand-text > img {
+    padding-inline: 1rem;
+  }
+  
+  .nav-link {
+    color: var(--color-textSecondary) !important;
+    
+    &:hover,
+    &:focus {
+      color: var(--color-primary) !important;
+    }
+  }
+  
+  .navbar-toggler {
+    border-color: var(--color-border);
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(241, 245, 249, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  }
 }
 
-.navbar-brand-text > img {
-  padding-inline: 1rem;
-}
-
-// Fixed carousel with aspect ratio (mobile-first)
+// Fixed carousel with aspect ratio (mobile-first) - full width, no gaps
 .carousel {
-  width: 100%;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   aspect-ratio: 16 / 9;
   max-height: 50vh;
   overflow: hidden;
-  border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   
   @media (min-width: 768px) {
@@ -160,10 +181,42 @@ body {
   }
 }
 
+// Full-width map container (edge to edge)
+.map-container {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden; // Prevent scrollbars
+  position: relative;
+  
+  // Override Bootstrap ratio class overflow behavior
+  &.ratio {
+    overflow: hidden !important;
+    position: relative;
+  }
+  
+  // Ensure ratio::before doesn't cause issues
+  &.ratio::before {
+    display: block;
+    content: "";
+    overflow: hidden;
+  }
+  
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+}
+
 .carousel-inner {
   width: 100%;
   height: 100%;
-  border-radius: 0.5rem;
 }
 
 .carousel-item {
@@ -176,12 +229,14 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: contrast(0.25);
-    transition: filter 0.3s ease-in-out;
+    opacity: 0.6; // Allow background to show through
+    filter: contrast(0.3);
+    transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
   
   &:hover img {
-    filter: contrast(0.35);
+    filter: contrast(0.4);
+    opacity: 0.7;
   }
 }
 
@@ -291,4 +346,17 @@ body {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+
+// Circuit background
+.circuit-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  // Opacity is controlled via component props, not CSS
 }

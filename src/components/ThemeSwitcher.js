@@ -1,55 +1,30 @@
 import React from 'react';
-import { Button, ButtonGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon, faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from '../hooks/useTheme';
 
 /**
  * Theme switcher component
- * Allows users to switch between default, light, and dark themes
- * Mobile-friendly with tooltips
+ * Toggles between light and dark themes
+ * Mobile-friendly
  */
 const ThemeSwitcher = () => {
-  const { currentTheme, setTheme, availableThemes } = useTheme();
-
-  const themeIcons = {
-    default: faPalette,
-    light: faSun,
-    dark: faMoon,
-  };
-
-  const themeLabels = {
-    default: 'Default',
-    light: 'Light',
-    dark: 'Dark',
-  };
+  const { currentTheme, toggleTheme } = useTheme();
 
   return (
-    <ButtonGroup size="sm" className="theme-switcher">
-      {availableThemes.map((themeName) => {
-        const isActive = currentTheme === themeName;
-        const icon = themeIcons[themeName];
-        const label = themeLabels[themeName];
-
-        return (
-          <OverlayTrigger
-            key={themeName}
-            placement="bottom"
-            overlay={<Tooltip>{label} Theme</Tooltip>}
-          >
-            <Button
-              variant={isActive ? 'primary' : 'outline-secondary'}
-              onClick={() => setTheme(themeName)}
-              aria-label={`Switch to ${label} theme`}
-              className="theme-switcher-btn"
-            >
-              <FontAwesomeIcon icon={icon} />
-              <span className="d-none d-md-inline ms-2">{label}</span>
-            </Button>
-          </OverlayTrigger>
-        );
-      })}
-    </ButtonGroup>
+    <Button
+      variant={currentTheme === 'dark' ? 'outline-light' : 'outline-dark'}
+      onClick={toggleTheme}
+      aria-label={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} theme`}
+      className="theme-switcher-btn"
+      size="sm"
+    >
+      <FontAwesomeIcon icon={currentTheme === 'dark' ? faSun : faMoon} />
+      <span className="d-none d-md-inline ms-2">
+        {currentTheme === 'dark' ? 'Light' : 'Dark'}
+      </span>
+    </Button>
   );
 };
 

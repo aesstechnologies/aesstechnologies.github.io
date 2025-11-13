@@ -23,7 +23,7 @@ export const config = {
 
   // Theme
   theme: {
-    defaultTheme: getEnvVar('REACT_APP_DEFAULT_THEME', 'default'),
+    defaultTheme: getEnvVar('REACT_APP_DEFAULT_THEME', 'dark'),
   },
 
   // Stripe

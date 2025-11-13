@@ -180,14 +180,20 @@ const ContactPage = () => {
             Liberagatan 32 <br />
             417 52 Göteborg, Sweden <br />
           </p>
-          <div className="ratio ratio-16x9" style={{ maxHeight: '450px' }}>
+        </Col>
+      </Row>
+      {/* Full-width map */}
+      <Row className="mb-4 mb-md-5">
+        <Col xs={12} className="p-0">
+          <div className="ratio ratio-16x9 map-container" style={{ maxHeight: '450px' }}>
             <iframe
               title="AESS Location - Google Maps"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2132.1234567890!2d11.9500000!3d57.7000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTfCsDQyJzAwLjAiTiAxMcKwNTcnMDAuMCJF!5e0!3m2!1sen!2sse!4v1234567890123!5m2!1sen!2sse"
-              style={{ border: 0 }}
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d23248.01560996478!2d11.938823!3d57.7058711!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff350fd308407%3A0xa60d2609b8db6dd7!2sLiberagatan%2032%2C%20417%2052%20G%C3%B6teborg!5e1!3m2!1sen!2sse!4v1763059686451!5m2!1sen!2sse"
+              style={{ border: 0, overflow: 'hidden' }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              scrolling="no"
             ></iframe>
           </div>
         </Col>
