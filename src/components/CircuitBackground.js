@@ -20,7 +20,6 @@ const CircuitBackground = ({
   verticalScroll = true
 }) => {
   const canvasRef = useRef(null);
-  const animationFrameRef = useRef(null);
   const nodesRef = useRef([]);
   const edgesRef = useRef([]);
   const signalsRef = useRef([]);
