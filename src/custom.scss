@@ -1,29 +1,294 @@
-$primary: #007bff;
+// Bootstrap customization with theme support
+// Use actual color values for Bootstrap SCSS compilation
+// CSS variables will override these at runtime for theming
+$primary: #1a365d;
+$secondary: #0ea5e9;
+$success: #10b981;
+$danger: #ef4444;
+$warning: #f59e0b;
+$info: #3b82f6;
 
 @import "~bootstrap/scss/bootstrap";
 
-.navbar-brand-text {
-    font-size: 1rem;
-    padding-inline: 1rem;
-  }
-  
-  .navbar-brand-text > img {
-    padding-inline: 1rem;
-  }
-  .carousel {
-
-    max-height: 50vh;
+// CSS Variables for theme support - Default theme
+:root,
+.theme-default {
+  --color-primary: #1a365d;
+  --color-primaryLight: #2c5282;
+  --color-primaryDark: #0f2027;
+  --color-secondary: #0ea5e9;
+  --color-secondaryLight: #38bdf8;
+  --color-secondaryDark: #0284c7;
+  --color-accent: #f97316;
+  --color-accentLight: #fb923c;
+  --color-accentDark: #ea580c;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+  --color-background: #ffffff;
+  --color-surface: #f8fafc;
+  --color-surfaceElevated: #ffffff;
+  --color-text: #1e293b;
+  --color-textSecondary: #64748b;
+  --color-textMuted: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-divider: #cbd5e1;
 }
 
-.carousel-item {
+// Light theme
+.theme-light {
+  --color-primary: #2563eb;
+  --color-primaryLight: #3b82f6;
+  --color-primaryDark: #1d4ed8;
+  --color-secondary: #06b6d4;
+  --color-secondaryLight: #22d3ee;
+  --color-secondaryDark: #0891b2;
+  --color-accent: #f59e0b;
+  --color-accentLight: #fbbf24;
+  --color-accentDark: #d97706;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+  --color-background: #ffffff;
+  --color-surface: #f1f5f9;
+  --color-surfaceElevated: #ffffff;
+  --color-text: #0f172a;
+  --color-textSecondary: #475569;
+  --color-textMuted: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-divider: #cbd5e1;
+}
+
+// Dark theme
+.theme-dark {
+  --color-primary: #3b82f6;
+  --color-primaryLight: #60a5fa;
+  --color-primaryDark: #2563eb;
+  --color-secondary: #06b6d4;
+  --color-secondaryLight: #22d3ee;
+  --color-secondaryDark: #0891b2;
+  --color-accent: #f97316;
+  --color-accentLight: #fb923c;
+  --color-accentDark: #ea580c;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-surfaceElevated: #334155;
+  --color-text: #f1f5f9;
+  --color-textSecondary: #cbd5e1;
+  --color-textMuted: #94a3b8;
+  --color-border: #334155;
+  --color-divider: #475569;
+}
+
+// Mobile-first base styles
+// Override Bootstrap colors with CSS variables for runtime theming
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+// Override Bootstrap's primary color with CSS variable
+.btn-primary,
+.bg-primary,
+.text-primary,
+.border-primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-background) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--color-primaryDark) !important;
+  border-color: var(--color-primaryDark) !important;
+}
+
+.text-primary {
+  color: var(--color-primary) !important;
+}
+
+.bg-primary {
+  background-color: var(--color-primary) !important;
+}
+
+// Override secondary colors
+.btn-secondary,
+.bg-secondary,
+.text-secondary,
+.border-secondary {
+  background-color: var(--color-secondary) !important;
+  border-color: var(--color-secondary) !important;
+}
+
+.text-secondary {
+  color: var(--color-secondary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary) !important;
+}
+
+// Navbar customization
+.navbar-brand-text {
+  font-size: 1rem;
+  padding-inline: 1rem;
+  font-weight: 600;
+}
+
+.navbar-brand-text > img {
+  padding-inline: 1rem;
+}
+
+// Fixed carousel with aspect ratio (mobile-first)
+.carousel {
+  width: 100%;
+  aspect-ratio: 16 / 9;
   max-height: 50vh;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  
+  @media (min-width: 768px) {
+    max-height: 60vh;
+  }
 }
 
 .carousel-inner {
-
-  border-radius: 0.25rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
 }
 
-.carousel-item img {
-  filter:contrast(0.25);
+.carousel-item {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: contrast(0.25);
+    transition: filter 0.3s ease-in-out;
+  }
+  
+  &:hover img {
+    filter: contrast(0.35);
+  }
+}
+
+.carousel-caption {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  padding: 1.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    
+    @media (min-width: 768px) {
+      font-size: 1.75rem;
+    }
+  }
+  
+  p {
+    font-size: 0.875rem;
+    margin-bottom: 0;
+    
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Theme switcher
+.theme-switcher {
+  .theme-switcher-btn {
+    min-width: 44px; // Touch target size for mobile
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Loading spinner
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// Smooth transitions
+* {
+  transition: background-color 0.2s ease-in-out, 
+              color 0.2s ease-in-out,
+              border-color 0.2s ease-in-out;
+}
+
+// Card improvements
+.card {
+  border-color: var(--color-border);
+  background-color: var(--color-surfaceElevated);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Button improvements
+.btn {
+  font-weight: 500;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Form improvements
+.form-control {
+  border-color: var(--color-border);
+  border-radius: 0.5rem;
+  
+  &:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem rgba(26, 54, 93, 0.25);
+  }
+}
+
+// Container improvements
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  
+  @media (min-width: 768px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }

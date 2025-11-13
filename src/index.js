@@ -3,10 +3,28 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import 'bootstrap/dist/css/bootstrap.min.css'; // <-- Importing default Bootstrap CSS
+import { config } from './config/env';
+import { initPlausible } from './services/analytics';
 
 import './custom.scss';
-// By making this change, you will be using your custom Bootstrap styles (defined in custom.scss) throughout your project instead of the default Bootstrap styles.
+
+// Initialize theme on app load
+const initializeTheme = () => {
+  const savedTheme = localStorage.getItem('aess-theme');
+  const themeName = savedTheme || config.theme.defaultTheme || 'default';
+  
+  // Apply theme class to body immediately to prevent flash
+  document.body.className = document.body.className
+    .replace(/theme-\w+/g, '')
+    .trim();
+  document.body.classList.add(`theme-${themeName}`);
+};
+
+// Initialize theme before rendering
+initializeTheme();
+
+// Initialize analytics
+initPlausible();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

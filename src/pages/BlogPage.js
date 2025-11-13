@@ -1,5 +1,7 @@
 import React from 'react';
-import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { config } from '../config/env';
+import MailchimpForm from '../components/MailchimpForm';
 
 const BlogPage = () => {
   const blogPosts = [
@@ -31,18 +33,13 @@ const BlogPage = () => {
           </Col>
         ))}
       </Row>
-      <Row className="my-5">
-        <Col>
-          <h3>Subscribe to Our Newsletter</h3>
-          <Form>
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter your email" />
-            </Form.Group>
-            <Button variant="primary" type="submit">Subscribe</Button>
-          </Form>
-        </Col>
-      </Row>
+      {config.features.enableNewsletter && (
+        <Row className="my-5">
+          <Col xs={12} md={8} lg={6} className="mx-auto">
+            <MailchimpForm />
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };
