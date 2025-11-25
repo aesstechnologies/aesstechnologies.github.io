@@ -50,11 +50,14 @@ const HomePage = () => {
 
   return (
     <>
+      {/* Hero Section */}
       <Container>
-        <Row className="my-4 my-md-5">
-          <Col>
-            <h1 className="display-5 fw-bold mb-3">Welcome to AESS</h1>
-            <p className="lead">
+        <Row className="my-5 my-md-5 py-4 py-md-5">
+          <Col xs={12} className="text-center text-md-start">
+            <h1 className="display-4 display-md-3 fw-bold mb-4" style={{ color: 'var(--color-text)' }}>
+              Welcome to AESS
+            </h1>
+            <p className="lead fs-4 mb-0" style={{ color: 'var(--color-textSecondary)' }}>
               We specialize in the design, development, and innovation of custom
               software applications and technological solutions.
             </p>
@@ -62,42 +65,45 @@ const HomePage = () => {
         </Row>
       </Container>
       
-      {/* Full-width carousel */}
-      <Row className="mb-4 mb-md-5">
-        <Col xs={12} className="p-0">
-          {!imagesLoaded && (
-            <div 
-              className="carousel"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'var(--color-surface)',
-              }}
-            >
-              <div className="loading-spinner"></div>
-            </div>
-          )}
-          {imagesLoaded && (
-            <Carousel fade interval={5000} className="carousel">
-              {carouselItems.map((item, index) => (
-                <Carousel.Item key={index}>
-                  <img
-                    className="d-block w-100"
-                    src={item.image}
-                    alt={item.title}
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                  <Carousel.Caption>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          )}
-        </Col>
-      </Row>
+      {/* Full-width carousel with gradient overlay */}
+      <div className="carousel-wrapper position-relative">
+        <Row>
+          <Col xs={12} className="p-0">
+            {!imagesLoaded && (
+              <div 
+                className="carousel"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'var(--color-surface)',
+                }}
+              >
+                <div className="loading-spinner"></div>
+              </div>
+            )}
+            {imagesLoaded && (
+              <Carousel fade interval={5000} className="carousel">
+                {carouselItems.map((item, index) => (
+                  <Carousel.Item key={index}>
+                    <img
+                      className="d-block w-100 carousel-image"
+                      src={item.image}
+                      alt={item.title}
+                      loading={index === 0 ? "eager" : "lazy"}
+                    />
+                    <div className="carousel-gradient-overlay"></div>
+                    <Carousel.Caption className="carousel-caption-custom">
+                      <h3 className="display-5 fw-bold mb-3">{item.title}</h3>
+                      <p className="lead">{item.description}</p>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            )}
+          </Col>
+        </Row>
+      </div>
     </>
   );
 };
