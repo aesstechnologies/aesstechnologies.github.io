@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Container, Spinner } from 'react-bootstrap';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import CircuitBackground from './components/CircuitBackground';
 import { config } from './config/env';
@@ -47,26 +48,29 @@ function App() {
           verticalScroll={false}
         />
         <Navbar />
-        <div className="main-content-wrapper">
-          <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
-              <Route path="/checkout/cancel" element={<CheckoutCancelPage />} />
-              {config.features.enablePortfolio && PortfolioPage && (
-                <Route path="/portfolio" element={<PortfolioPage />} />
-              )}
-              {config.features.enableBlog && BlogPage && (
-                <Route path="/blog" element={<BlogPage />} />
-              )}
-              {/* 404 fallback */}
-              <Route path="*" element={<HomePage />} />
-            </Routes>
-          </Suspense>
+        <div className="main-content-wrapper d-flex flex-column min-vh-100">
+          <div className="flex-grow-1">
+            <Suspense fallback={<LoadingFallback />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
+                <Route path="/checkout/cancel" element={<CheckoutCancelPage />} />
+                {config.features.enablePortfolio && PortfolioPage && (
+                  <Route path="/portfolio" element={<PortfolioPage />} />
+                )}
+                {config.features.enableBlog && BlogPage && (
+                  <Route path="/blog" element={<BlogPage />} />
+                )}
+                {/* 404 fallback */}
+                <Route path="*" element={<HomePage />} />
+              </Routes>
+            </Suspense>
+          </div>
+          <Footer />
         </div>
       </Router>
     </ErrorBoundary>

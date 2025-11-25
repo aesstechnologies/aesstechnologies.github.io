@@ -10,7 +10,7 @@ $info: #3b82f6;
 
 @import "~bootstrap/scss/bootstrap";
 
-// Dark theme (default)
+// Dark theme (default) - 1 tone darker
 :root,
 .theme-dark {
   --color-primary: #3b82f6;
@@ -26,17 +26,21 @@ $info: #3b82f6;
   --color-error: #ef4444;
   --color-warning: #f59e0b;
   --color-info: #3b82f6;
-  --color-background: #0f172a;
-  --color-surface: #1e293b;
-  --color-surfaceElevated: #334155;
+  --color-background: #020617;
+  --color-surface: #0f172a;
+  --color-surfaceElevated: #1e293b;
   --color-text: #f1f5f9;
   --color-textSecondary: #cbd5e1;
   --color-textMuted: #94a3b8;
-  --color-border: #334155;
-  --color-divider: #475569;
+  --color-border: #1e293b;
+  --color-divider: #334155;
+  // Circuit background colors (lighter for visibility on dark background)
+  --circuit-node-color: rgba(26, 54, 93, 0.6);
+  --circuit-edge-color: rgba(26, 54, 93, 0.5);
+  --circuit-signal-color: rgba(14, 165, 233, 0.9);
 }
 
-// Light theme
+// Light theme - light grays instead of whites (one tone darker)
 .theme-light {
   --color-primary: #2563eb;
   --color-primaryLight: #3b82f6;
@@ -51,14 +55,18 @@ $info: #3b82f6;
   --color-error: #ef4444;
   --color-warning: #f59e0b;
   --color-info: #3b82f6;
-  --color-background: #ffffff;
-  --color-surface: #f1f5f9;
-  --color-surfaceElevated: #ffffff;
+  --color-background: #d5e2ef;
+  --color-surface: #e2e8f0;
+  --color-surfaceElevated: #cbd5e1;
   --color-text: #0f172a;
   --color-textSecondary: #475569;
-  --color-textMuted: #94a3b8;
-  --color-border: #e2e8f0;
-  --color-divider: #cbd5e1;
+  --color-textMuted: #64748b;
+  --color-border: #94a3b8;
+  --color-divider: #64748b;
+  // Circuit background colors (darker for visibility on light background)
+  --circuit-node-color: rgba(30, 41, 59, 0.4);
+  --circuit-edge-color: rgba(30, 41, 59, 0.3);
+  --circuit-signal-color: rgba(14, 116, 144, 0.8);
 }
 
 
@@ -81,6 +89,23 @@ body {
   
   @media (min-width: 768px) {
     padding-top: 5rem; // More space on larger screens
+  }
+}
+
+// Footer styles
+.footer {
+  margin-top: auto;
+  
+  a {
+    transition: color 0.2s ease-in-out;
+    
+    &:hover {
+      color: var(--color-primary) !important;
+    }
+  }
+  
+  h5, h6 {
+    color: var(--color-text) !important;
   }
 }
 
@@ -147,6 +172,7 @@ body {
 
   .navbar-brand-text > img {
     padding-inline: 1rem;
+    transition: filter 0.2s ease-in-out;
   }
   
   .nav-link {
@@ -279,6 +305,21 @@ body {
   }
 }
 
+// Dark theme - invert logo (make it white)
+.theme-dark .navbar {
+  .navbar-brand-text > img {
+    filter: brightness(0) invert(1);
+  }
+}
+
+// Carousel wrapper
+.carousel-wrapper {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-bottom: 0; // Remove gap before footer
+}
+
 // Fixed carousel with aspect ratio (mobile-first) - full width, no gaps
 .carousel {
   width: 100vw;
@@ -287,9 +328,96 @@ body {
   max-height: 50vh;
   overflow: hidden;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: relative;
   
   @media (min-width: 768px) {
     max-height: 60vh;
+  }
+  
+  // Hide arrows and indicators on mobile
+  @media (max-width: 767.98px) {
+    .carousel-control-prev,
+    .carousel-control-next {
+      display: none !important;
+    }
+    
+    .carousel-indicators {
+      display: none !important;
+    }
+  }
+  
+  // Carousel images with opacity to reveal background
+  .carousel-image {
+    opacity: 0.7;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  
+  // Gradient overlay on top of carousel to blend into background
+  .carousel-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(
+      to bottom,
+      var(--color-background) 0%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  // Custom carousel caption styling - centered vertically, edge to edge
+  .carousel-caption-custom {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 2rem 1rem;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.7) 40%,
+      rgba(0, 0, 0, 0.5) 60%,
+      transparent 100%
+    );
+    backdrop-filter: blur(10px);
+    text-align: center;
+    z-index: 2;
+    width: 100%;
+    
+    @media (min-width: 768px) {
+      padding: 2.5rem 2rem;
+    }
+    
+    @media (max-width: 767.98px) {
+      padding: 1.5rem 1rem;
+      
+      h3 {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.75rem !important;
+      }
+      
+      p {
+        font-size: 0.95rem !important;
+      }
+    }
+    
+    h3 {
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      margin-bottom: 0;
+    }
   }
 }
 

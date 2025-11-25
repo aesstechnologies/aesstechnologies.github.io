@@ -34,6 +34,16 @@ const CircuitBackground = ({
     const ctx = canvas.getContext('2d');
     let animationId;
 
+    // Get theme-aware colors from CSS variables
+    const getThemeColors = () => {
+      const computedStyle = getComputedStyle(document.body);
+      return {
+        nodeColor: computedStyle.getPropertyValue('--circuit-node-color').trim() || 'rgba(26, 54, 93, 0.6)',
+        edgeColor: computedStyle.getPropertyValue('--circuit-edge-color').trim() || 'rgba(26, 54, 93, 0.5)',
+        signalColor: computedStyle.getPropertyValue('--circuit-signal-color').trim() || 'rgba(14, 165, 233, 0.9)',
+      };
+    };
+
     // Set canvas size - use clientWidth/clientHeight to avoid scrollbar overflow
     const resizeCanvas = () => {
       // Use document.documentElement.clientWidth/Height to exclude scrollbars
@@ -89,7 +99,7 @@ const CircuitBackground = ({
         };
       }
 
-      draw(ctx, opacity, globalPhase, scrollOffset) {
+      draw(ctx, opacity, globalPhase, scrollOffset, nodeColor) {
         const pos = this.getPosition(scrollOffset);
         ctx.beginPath();
         // Harmonized pulsation
@@ -97,15 +107,37 @@ const CircuitBackground = ({
         const nodeOpacity = opacity * (0.5 + pulse * 0.3);
         const nodeRadius = this.radius * (1 + pulse * 0.2);
         
-        if (this.isHollow) {
-          ctx.arc(pos.x, pos.y, nodeRadius, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(26, 54, 93, ${nodeOpacity})`;
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
+        // Parse RGBA color and apply opacity
+        const rgbaMatch = nodeColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+        if (rgbaMatch) {
+          const r = rgbaMatch[1];
+          const g = rgbaMatch[2];
+          const b = rgbaMatch[3];
+          const baseOpacity = rgbaMatch[4] ? parseFloat(rgbaMatch[4]) : 1;
+          const finalOpacity = baseOpacity * nodeOpacity;
+          
+          if (this.isHollow) {
+            ctx.arc(pos.x, pos.y, nodeRadius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${finalOpacity})`;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+          } else {
+            ctx.arc(pos.x, pos.y, nodeRadius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${finalOpacity})`;
+            ctx.fill();
+          }
         } else {
-          ctx.arc(pos.x, pos.y, nodeRadius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(26, 54, 93, ${nodeOpacity})`;
-          ctx.fill();
+          // Fallback to original color if parsing fails
+          if (this.isHollow) {
+            ctx.arc(pos.x, pos.y, nodeRadius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(26, 54, 93, ${nodeOpacity})`;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+          } else {
+            ctx.arc(pos.x, pos.y, nodeRadius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(26, 54, 93, ${nodeOpacity})`;
+            ctx.fill();
+          }
         }
       }
     }
@@ -172,7 +204,7 @@ const CircuitBackground = ({
         return points;
       }
 
-      draw(ctx, opacity, globalPhase, scrollOffset) {
+      draw(ctx, opacity, globalPhase, scrollOffset, edgeColor) {
         ctx.beginPath();
         
         // Harmonized pulsation for edges
@@ -202,7 +234,18 @@ const CircuitBackground = ({
           ctx.lineTo(node2Pos.x, node2Pos.y);
         }
         
-        ctx.strokeStyle = `rgba(26, 54, 93, ${edgeOpacity})`;
+        // Parse RGBA color and apply opacity
+        const rgbaMatch = edgeColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+        if (rgbaMatch) {
+          const r = rgbaMatch[1];
+          const g = rgbaMatch[2];
+          const b = rgbaMatch[3];
+          const baseOpacity = rgbaMatch[4] ? parseFloat(rgbaMatch[4]) : 1;
+          const finalOpacity = baseOpacity * edgeOpacity;
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${finalOpacity})`;
+        } else {
+          ctx.strokeStyle = `rgba(26, 54, 93, ${edgeOpacity})`;
+        }
         ctx.lineWidth = lineWidth;
         ctx.stroke();
       }
@@ -232,7 +275,7 @@ const CircuitBackground = ({
         }
       }
 
-      draw(ctx, opacity, globalPhase, scrollOffset) {
+      draw(ctx, opacity, globalPhase, scrollOffset, signalColor) {
         if (!this.edge.active) return;
         
         // Harmonized pulsation for signals
@@ -286,11 +329,21 @@ const CircuitBackground = ({
         const x = x1 + (x2 - x1) * segmentProgress;
         const y = y1 + (y2 - y1) * segmentProgress;
 
+        // Parse signal color from CSS variable
+        const rgbaMatch = signalColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+        let r = 14, g = 165, b = 233, baseOpacity = 0.9;
+        if (rgbaMatch) {
+          r = parseInt(rgbaMatch[1]);
+          g = parseInt(rgbaMatch[2]);
+          b = parseInt(rgbaMatch[3]);
+          baseOpacity = rgbaMatch[4] ? parseFloat(rgbaMatch[4]) : 0.9;
+        }
+
         // Draw glowing signal with pulsation
         const gradient = ctx.createRadialGradient(x, y, 0, x, y, signalSize * 2);
-        gradient.addColorStop(0, `rgba(14, 165, 233, ${Math.min(signalOpacity * 2, 1)})`);
-        gradient.addColorStop(0.5, `rgba(14, 165, 233, ${signalOpacity})`);
-        gradient.addColorStop(1, 'rgba(14, 165, 233, 0)');
+        gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${Math.min(baseOpacity * signalOpacity * 2, 1)})`);
+        gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${baseOpacity * signalOpacity})`);
+        gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
 
         ctx.beginPath();
         ctx.arc(x, y, signalSize, 0, Math.PI * 2);
@@ -327,8 +380,8 @@ const CircuitBackground = ({
         const trailY = trailY1 + (trailY2 - trailY1) * trailSegmentProgress;
 
         const trailGradient = ctx.createLinearGradient(trailX, trailY, x, y);
-        trailGradient.addColorStop(0, 'rgba(14, 165, 233, 0)');
-        trailGradient.addColorStop(1, `rgba(14, 165, 233, ${signalOpacity * 0.5})`);
+        trailGradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0)`);
+        trailGradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, ${baseOpacity * signalOpacity * 0.5})`);
 
         ctx.beginPath();
         ctx.moveTo(trailX, trailY);
@@ -497,18 +550,21 @@ const CircuitBackground = ({
         signal.update();
       });
 
+      // Get theme colors
+      const themeColors = getThemeColors();
+      
       // Helper function to draw the pattern at a specific scroll offset
       const drawPattern = (patternScrollOffset) => {
         // Draw edges (with pulsation)
-        edgesRef.current.forEach(edge => edge.draw(ctx, opacity, globalPulsePhaseRef.current, patternScrollOffset));
+        edgesRef.current.forEach(edge => edge.draw(ctx, opacity, globalPulsePhaseRef.current, patternScrollOffset, themeColors.edgeColor));
 
         // Draw signals
         signalsRef.current.forEach(signal => {
-          signal.draw(ctx, opacity, globalPulsePhaseRef.current, patternScrollOffset);
+          signal.draw(ctx, opacity, globalPulsePhaseRef.current, patternScrollOffset, themeColors.signalColor);
         });
 
         // Draw nodes (with harmonized pulsation)
-        nodesRef.current.forEach(node => node.draw(ctx, opacity, globalPulsePhaseRef.current, patternScrollOffset));
+        nodesRef.current.forEach(node => node.draw(ctx, opacity, globalPulsePhaseRef.current, patternScrollOffset, themeColors.nodeColor));
       };
 
       // For infinite scroll: draw pattern above current view

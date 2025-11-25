@@ -28,15 +28,15 @@ export const themes = {
       warning: '#f59e0b',
       info: '#3b82f6',
       
-      // Neutral colors
-      background: '#0f172a',    // Dark slate
-      surface: '#1e293b',
-      surfaceElevated: '#334155',
+      // Neutral colors - 1 tone darker
+      background: '#020617',    // Darker slate
+      surface: '#0f172a',
+      surfaceElevated: '#1e293b',
       text: '#f1f5f9',
       textSecondary: '#cbd5e1',
       textMuted: '#94a3b8',
-      border: '#334155',
-      divider: '#475569',
+      border: '#1e293b',
+      divider: '#334155',
     },
   },
   
@@ -64,15 +64,15 @@ export const themes = {
       warning: '#f59e0b',
       info: '#3b82f6',
       
-      // Neutral colors
-      background: '#ffffff',
-      surface: '#f1f5f9',
-      surfaceElevated: '#ffffff',
+      // Neutral colors - light grays instead of whites (one tone darker)
+      background: '#d5e2ef',    // Bluish gray, less white
+      surface: '#e2e8f0',
+      surfaceElevated: '#cbd5e1', // Darker gray
       text: '#0f172a',
       textSecondary: '#475569',
-      textMuted: '#94a3b8',
-      border: '#e2e8f0',
-      divider: '#cbd5e1',
+      textMuted: '#64748b',
+      border: '#94a3b8',
+      divider: '#64748b',
     },
   },
 };
