@@ -13,9 +13,9 @@ import React, { useEffect, useRef } from 'react';
  */
 const CircuitBackground = ({ 
   className = '', 
-  opacity = 0.3, 
-  speed = 1,
-  density = 1,
+  opacity = 0.2,  // Default matches config.env.js
+  speed = 0.5,     // Default matches config.env.js
+  density = 1.2,   // Default matches config.env.js
   floating = true,
   verticalScroll = true
 }) => {
