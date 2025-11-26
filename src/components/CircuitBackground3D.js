@@ -272,7 +272,6 @@ const CircuitBackground3D = ({
         
         // Account for node floating offsets
         const node1OffsetX = this.node1.x - this.node1.baseX;
-        const node1OffsetY = this.node1.y - this.node1.baseY;
         const node1OffsetZ = this.node1.z - this.node1.baseZ;
         const totalScrollOffset = scrollOffsetRef.current + pageScrollOffsetRef.current;
         
@@ -401,7 +400,6 @@ const CircuitBackground3D = ({
         const p2 = pathPoints[segmentIndex + 1];
         
         const node1OffsetX = this.edge.node1.x - this.edge.node1.baseX;
-        const node1OffsetY = this.edge.node1.y - this.edge.node1.baseY;
         const node1OffsetZ = this.edge.node1.z - this.edge.node1.baseZ;
         const totalScrollOffset = scrollOffsetRef.current + pageScrollOffsetRef.current;
         
