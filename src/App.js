@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import CircuitBackground from './components/CircuitBackground';
+import CircuitBackground3D from './components/CircuitBackground3D';
 import { config } from './config/env';
 import './App.css';
 
@@ -37,16 +38,30 @@ const LoadingFallback = () => (
 );
 
 function App() {
+  const { use3D, opacity, speed, density, floating, verticalScroll, depth } = config.circuitBackground;
+
   return (
     <ErrorBoundary>
       <Router>
-        <CircuitBackground 
-          opacity={.2} 
-          speed={.5} 
-          density={1.2}
-          floating={true}
-          verticalScroll={false}
-        />
+        {/* Circuit Background - Switch between 2D and 3D via config.circuitBackground.use3D */}
+        {use3D ? (
+          <CircuitBackground3D 
+            opacity={opacity} 
+            speed={speed} 
+            density={density}
+            floating={floating}
+            verticalScroll={verticalScroll}
+            depth={depth}
+          />
+        ) : (
+          <CircuitBackground 
+            opacity={opacity} 
+            speed={speed} 
+            density={density}
+            floating={floating}
+            verticalScroll={verticalScroll}
+          />
+        )}
         <Navbar />
         <div className="main-content-wrapper d-flex flex-column min-vh-100">
           <div className="flex-grow-1">

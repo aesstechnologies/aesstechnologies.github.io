@@ -21,6 +21,21 @@ export const config = {
     enableNewsletter: getBooleanEnvVar('REACT_APP_ENABLE_NEWSLETTER', false),
   },
 
+  // Circuit Background
+  circuitBackground: {
+    // Use 3D version (Three.js) instead of 2D version (Canvas)
+    // Set to true for 3D, false for 2D
+    use3D: getBooleanEnvVar('REACT_APP_CIRCUIT_BG_3D', true),
+    // Configuration options (applies to both 2D and 3D)
+    opacity: parseFloat(getEnvVar('REACT_APP_CIRCUIT_BG_OPACITY', '0.2')) || 0.2,
+    speed: parseFloat(getEnvVar('REACT_APP_CIRCUIT_BG_SPEED', '0.5')) || 0.5,
+    density: parseFloat(getEnvVar('REACT_APP_CIRCUIT_BG_DENSITY', '1.2')) || 1.2,
+    floating: getBooleanEnvVar('REACT_APP_CIRCUIT_BG_FLOATING', true),
+    verticalScroll: getBooleanEnvVar('REACT_APP_CIRCUIT_BG_VERTICAL_SCROLL', true),
+    // 3D-specific option
+    depth: parseFloat(getEnvVar('REACT_APP_CIRCUIT_BG_DEPTH', '1000')) || 1000,
+  },
+
   // Theme
   theme: {
     defaultTheme: getEnvVar('REACT_APP_DEFAULT_THEME', 'dark'),
