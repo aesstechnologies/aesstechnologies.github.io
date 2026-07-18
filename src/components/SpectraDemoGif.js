@@ -1,7 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-export const SPECTRA_DEMO_SRC = `${process.env.PUBLIC_URL}/spectra-demo.gif`;
+export const SPECTRA_DEMO_VIDEO_SRC = `${process.env.PUBLIC_URL}/spectra-demo.mp4`;
+export const SPECTRA_DEMO_POSTER_SRC = `${process.env.PUBLIC_URL}/spectra-demo.gif`;
+/** @deprecated Use SPECTRA_DEMO_VIDEO_SRC — kept for backwards compatibility */
+export const SPECTRA_DEMO_SRC = SPECTRA_DEMO_POSTER_SRC;
 
 export const SPECTRA_DEMO_ALT =
   'Spectra dashboard showing YAML test suite run graph with UI, socket, and screen assert steps';
@@ -14,6 +17,7 @@ const SpectraDemoGif = ({
   alt = SPECTRA_DEMO_ALT,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const lightboxVideoRef = useRef(null);
 
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
@@ -33,9 +37,20 @@ const SpectraDemoGif = ({
     document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', onKeyDown);
 
+    const video = lightboxVideoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', onKeyDown);
+
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
     };
   }, [close, isOpen]);
 
@@ -48,12 +63,16 @@ const SpectraDemoGif = ({
         onClick={open}
         aria-label="View Spectra demo in full screen"
       >
-        <img
-          src={SPECTRA_DEMO_SRC}
-          alt={alt}
+        <video
+          src={SPECTRA_DEMO_VIDEO_SRC}
+          poster={SPECTRA_DEMO_POSTER_SRC}
           className={imgClassName}
-          loading="lazy"
           style={imgStyle}
+          muted
+          loop
+          playsInline
+          autoPlay
+          aria-label={alt}
         />
         <span className="spectra-demo-gif-hint" aria-hidden="true">
           Click to enlarge
@@ -78,10 +97,13 @@ const SpectraDemoGif = ({
               ×
             </button>
             <div className="spectra-demo-lightbox-stage">
-              <img
-                src={SPECTRA_DEMO_SRC}
-                alt={alt}
-                className="spectra-demo-lightbox-image"
+              <video
+                ref={lightboxVideoRef}
+                src={SPECTRA_DEMO_VIDEO_SRC}
+                poster={SPECTRA_DEMO_POSTER_SRC}
+                className="spectra-demo-lightbox-media"
+                controls
+                playsInline
                 onClick={(event) => event.stopPropagation()}
               />
             </div>
