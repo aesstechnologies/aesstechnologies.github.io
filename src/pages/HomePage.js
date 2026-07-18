@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Carousel } from "react-bootstrap";
+import { Container, Row, Col, Carousel, Card, Button, Badge } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import customSoftwareImg from '../assets/customSoftware.jpg';
 import webdevImg from '../assets/webdev.jpg';
 import mobiledevImg from '../assets/mobiledev.jpg';
@@ -61,6 +64,63 @@ const HomePage = () => {
               We specialize in the design, development, and innovation of custom
               software applications and technological solutions.
             </p>
+          </Col>
+        </Row>
+      </Container>
+
+      {/* Spectra product spotlight */}
+      <Container className="mb-5 pb-2">
+        <Row className="justify-content-center">
+          <Col xs={12} lg={10}>
+            <Card
+              className="border-0 shadow-sm overflow-hidden"
+              style={{ backgroundColor: 'var(--color-surface)' }}
+            >
+              <Row className="g-0 align-items-center">
+                <Col xs={12} md={5}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/spectra-demo.gif`}
+                    alt="Spectra dashboard run graph"
+                    className="w-100 d-block"
+                    loading="lazy"
+                    style={{ maxHeight: '280px', objectFit: 'cover' }}
+                  />
+                </Col>
+                <Col xs={12} md={7} className="p-4 p-md-5">
+                  <Badge
+                    bg="secondary"
+                    className="mb-3"
+                    style={{ backgroundColor: 'var(--color-surfaceElevated) !important' }}
+                  >
+                    Product
+                  </Badge>
+                  <h2 className="h3 fw-bold mb-3" style={{ color: 'var(--color-text)' }}>
+                    Spectra — test real-time operator UIs
+                  </h2>
+                  <p className="mb-4" style={{ color: 'var(--color-textSecondary)' }}>
+                    YAML suites for browser actions, socket events, and screen baselines.
+                    Dashboard for QA, CLI for CI — with a 30-day free trial.
+                  </p>
+                  <div className="d-flex flex-wrap gap-2">
+                    <Button
+                      as={Link}
+                      to="/spectra"
+                      variant="primary"
+                      style={{
+                        backgroundColor: 'var(--color-accent)',
+                        borderColor: 'var(--color-accent)',
+                      }}
+                    >
+                      Explore Spectra
+                      <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+                    </Button>
+                    <Button as={Link} to="/services" variant="outline-primary">
+                      Custom services
+                    </Button>
+                  </div>
+                </Col>
+              </Row>
+            </Card>
           </Col>
         </Row>
       </Container>
