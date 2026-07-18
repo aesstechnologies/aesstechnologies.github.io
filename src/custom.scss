@@ -83,6 +83,11 @@ body {
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
+// Anchor scroll offset for sticky navbar
+.scroll-margin-top {
+  scroll-margin-top: 6rem;
+}
+
 // Main content wrapper - adds spacing below sticky navbar
 .main-content-wrapper {
   padding-top: 4rem; // Space for sticky navbar (mobile)
