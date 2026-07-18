@@ -9,8 +9,8 @@ export const blogPosts = [
     publishedAt: '2026-07-18',
     readMinutes: 8,
     tags: ['QA', 'UI testing', 'Spectra', 'Real-time apps'],
-    ogImage: '/logo512.png',
-    heroImage: `${process.env.PUBLIC_URL}/spectra-demo.gif`,
+    ogImage: '/og/blog-ui-testing.png',
+    heroImage: `${process.env.PUBLIC_URL}/marketing/screenshots/run-graph.png`,
   },
 ];
 
