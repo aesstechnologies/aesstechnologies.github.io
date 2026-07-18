@@ -27,6 +27,9 @@ jobs:
       - name: Build
         run: npm run build --if-present
 
+      - name: SPA fallback for client-side routes
+        run: cp build/index.html build/404.html
+
       - name: Ensure CNAME in build (if present in public/)
         run: |
           if [ -f public/CNAME ]; then
