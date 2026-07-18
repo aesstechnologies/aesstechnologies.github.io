@@ -16,7 +16,7 @@
   <text x="80" y="280" fill="#94a3b8" font-family="system-ui,Segoe UI,sans-serif" font-size="28" letter-spacing="6">AESS TECHNOLOGIES</text>
   <text x="80" y="420" fill="#f8fafc" font-family="system-ui,Segoe UI,sans-serif" font-size="112" font-weight="700">Spectra</text>
   <text x="80" y="500" fill="#cbd5e1" font-family="system-ui,Segoe UI,sans-serif" font-size="36">Test real-time operator UIs</text>
-  <text x="80" y="580" fill="#94a3b8" font-family="system-ui,Segoe UI,sans-serif" font-size="28">YAML · Browser · Socket · Vision</text>
+  <text x="80" y="580" fill="#94a3b8" font-family="system-ui,Segoe UI,sans-serif" font-size="28">YAML + Browser + Socket + Vision</text>
   <rect x="80" y="640" width="420" height="56" rx="28" fill="url(#accent)"/>
   <text x="290" y="677" fill="#0f172a" font-family="system-ui,Segoe UI,sans-serif" font-size="24" font-weight="700" text-anchor="middle">30-day free trial</text>
   <text x="80" y="820" fill="#64748b" font-family="system-ui,Segoe UI,sans-serif" font-size="26">www.aesstechnologies.com/spectra</text>
