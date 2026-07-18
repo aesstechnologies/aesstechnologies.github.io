@@ -17,6 +17,9 @@ const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const SpectraPage = lazy(() => import('./pages/SpectraPage'));
 const SpectraWelcomePage = lazy(() => import('./pages/SpectraWelcomePage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const RefundPolicyPage = lazy(() => import('./pages/RefundPolicyPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const CheckoutSuccessPage = lazy(() => import('./pages/CheckoutSuccessPage'));
 const CheckoutCancelPage = lazy(() => import('./pages/CheckoutCancelPage'));
@@ -75,6 +78,9 @@ function App() {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/spectra" element={<SpectraPage />} />
                 <Route path="/spectra/welcome" element={<SpectraWelcomePage />} />
+                <Route path="/terms" element={<TermsPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/refund-policy" element={<RefundPolicyPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
                 <Route path="/checkout/cancel" element={<CheckoutCancelPage />} />

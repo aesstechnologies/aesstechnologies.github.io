@@ -39,6 +39,11 @@ const Footer = () => {
                   Services
                 </Link>
               </li>
+              <li className="mb-2">
+                <Link to="/spectra" className="text-muted text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
+                  Spectra
+                </Link>
+              </li>
               {features.enablePortfolio && (
                 <li className="mb-2">
                   <Link to="/portfolio" className="text-muted text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
@@ -79,6 +84,19 @@ const Footer = () => {
         <hr className="my-4" style={{ borderColor: 'var(--color-border)' }} />
         <Row>
           <Col xs={12} className="text-center">
+            <p className="text-muted small mb-2">
+              <Link to="/terms" className="text-muted text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
+                Terms
+              </Link>
+              {' · '}
+              <Link to="/privacy" className="text-muted text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
+                Privacy
+              </Link>
+              {' · '}
+              <Link to="/refund-policy" className="text-muted text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
+                Refund Policy
+              </Link>
+            </p>
             <p className="text-muted small mb-0">
               &copy; {currentYear} AESS Technologies. All rights reserved.
             </p>

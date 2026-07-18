@@ -455,9 +455,18 @@ const SpectraPage = () => {
                 {supportEmail}
               </a>
             </p>
-            {/* TODO: Link Terms, Privacy, and Refund policy pages before live checkout CTAs */}
             <p className="small mb-0" style={{ color: 'var(--color-textMuted)' }}>
-              Terms, Privacy &amp; Refund policy — coming soon
+              <Link to="/terms" style={{ color: 'var(--color-primary)' }}>
+                Terms of Service
+              </Link>
+              {' · '}
+              <Link to="/privacy" style={{ color: 'var(--color-primary)' }}>
+                Privacy Policy
+              </Link>
+              {' · '}
+              <Link to="/refund-policy" style={{ color: 'var(--color-primary)' }}>
+                Refund Policy
+              </Link>
             </p>
           </Col>
         </Row>
