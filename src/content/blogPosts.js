@@ -3,6 +3,25 @@ import { Link } from 'react-router-dom';
 import { Alert, Button } from 'react-bootstrap';
 import { spectraConfig } from '../config/spectra';
 
+const publicUrl = process.env.PUBLIC_URL || '';
+
+const BlogFigure = ({ file, alt, caption }) => (
+  <figure className="blog-figure my-4">
+    <img
+      src={`${publicUrl}/marketing/screenshots/${file}`}
+      alt={alt}
+      className="w-100 rounded-3 d-block shadow-sm"
+      loading="lazy"
+      style={{ border: '1px solid var(--color-border)' }}
+    />
+    {caption && (
+      <figcaption className="small mt-2 mb-0" style={{ color: 'var(--color-textMuted)' }}>
+        {caption}
+      </figcaption>
+    )}
+  </figure>
+);
+
 const BlogPostUiTestingFrameworks = () => (
   <article className="blog-article">
     <p className="lead" style={{ color: 'var(--color-textSecondary)' }}>
@@ -73,6 +92,11 @@ const BlogPostUiTestingFrameworks = () => (
     </p>
 
     <h2 className="h4 fw-bold mt-5 mb-3">Where Spectra fits</h2>
+    <BlogFigure
+      file="run-graph.png"
+      alt="Spectra run graph showing UI, socket, and screen-assert steps with pass status"
+      caption="Run graph: four incident-flow cases with UI, socket inject/wait, and screen assert in one view."
+    />
     <p style={{ color: 'var(--color-textSecondary)', lineHeight: 1.85 }}>
       We built{' '}
       <Link to="/spectra" style={{ color: 'var(--color-primary)' }}>
@@ -88,6 +112,17 @@ const BlogPostUiTestingFrameworks = () => (
       headlessly in GitHub Actions or Azure DevOps via <code>spectra run</code>. No second
       repo of one-off injectors; no “socket team” separate from “UI team.”
     </p>
+
+    <BlogFigure
+      file="html-report.png"
+      alt="Spectra HTML report with socket.inject evidence and step timings"
+      caption="HTML report: socket.inject payload and screenshot evidence on the same step."
+    />
+    <BlogFigure
+      file="screen-assert.png"
+      alt="Operator UI under test showing anomaly detected modal during Spectra run"
+      caption="Live operator UI under test — anomaly modal after injected device signal."
+    />
 
     <Alert
       variant="secondary"

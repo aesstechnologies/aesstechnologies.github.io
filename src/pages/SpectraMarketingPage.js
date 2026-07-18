@@ -13,6 +13,7 @@ import { spectraConfig } from '../config/spectra';
 import usePageMeta from '../hooks/usePageMeta';
 import { absoluteUrl, siteConfig } from '../config/site';
 import { trackEvent } from '../services/analytics';
+import { marketingScreenshots, screenshotUrl } from '../data/marketingScreenshots';
 
 const marketingAssets = [
   {
@@ -93,7 +94,7 @@ const SpectraMarketingPage = () => {
     description:
       'Download Spectra social banners, copy templates, and hashtags for Instagram, LinkedIn, and product launches.',
     canonicalPath: '/spectra/marketing',
-    ogImage: '/marketing/spectra-linkedin-banner.svg',
+    ogImage: '/og/spectra-social.png',
   });
 
   return (
@@ -104,9 +105,9 @@ const SpectraMarketingPage = () => {
             Spectra marketing kit
           </h1>
           <p className="lead mb-0" style={{ color: 'var(--color-textSecondary)' }}>
-            Banners, captions, and hashtags to promote Spectra on social channels. SVG
-            files scale cleanly — export to PNG in Figma or Canva if your platform requires
-            raster images.
+            Product screenshots, social banners, captions, and hashtags to promote Spectra.
+            PNG screenshots are ready for LinkedIn and Instagram; SVG banners scale for custom
+            layouts.
           </p>
         </Col>
         <Col xs={12} lg={4} className="d-flex align-items-start justify-content-lg-end mt-3 mt-lg-0">
@@ -131,7 +132,60 @@ const SpectraMarketingPage = () => {
         <Col xs={12}>
           <h2 className="h4 fw-bold mb-3">
             <FontAwesomeIcon icon={faImage} className="me-2" style={{ color: 'var(--color-accent)' }} />
-            Download banners
+            Product screenshots (PNG)
+          </h2>
+          <p className="mb-4" style={{ color: 'var(--color-textSecondary)' }}>
+            Extracted from the latest Spectra demo recording (1280×720). Use on LinkedIn,
+            blog posts, and ads. Right-click → Save image, or use the download button.
+          </p>
+          <Row xs={1} sm={2} lg={3} className="g-4">
+            {marketingScreenshots.map((shot) => (
+              <Col key={shot.id}>
+                <Card className="h-100 border-0 shadow-sm overflow-hidden" style={{ backgroundColor: 'var(--color-surface)' }}>
+                  <img
+                    src={screenshotUrl(shot.file)}
+                    alt={shot.title}
+                    className="w-100 d-block"
+                    loading="lazy"
+                  />
+                  <Card.Body>
+                    <Card.Title as="h3" className="h6 fw-bold">
+                      {shot.title}
+                    </Card.Title>
+                    <Card.Text className="small mb-2" style={{ color: 'var(--color-textSecondary)' }}>
+                      {shot.description}
+                    </Card.Text>
+                    <Card.Text className="small mb-3" style={{ color: 'var(--color-textMuted)' }}>
+                      Best for: {shot.useFor}
+                    </Card.Text>
+                    <Button
+                      as="a"
+                      href={screenshotUrl(shot.file)}
+                      download={`spectra-${shot.id}.png`}
+                      variant="outline-primary"
+                      size="sm"
+                      onClick={() => trackEvent('spectra_marketing_download', { asset: shot.id, type: 'screenshot' })}
+                    >
+                      <FontAwesomeIcon icon={faDownload} className="me-1" />
+                      Download PNG
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          <Alert variant="secondary" className="mt-4 border-0 small" style={{ backgroundColor: 'var(--color-surfaceElevated)' }}>
+            <strong>CLI terminal screenshot:</strong> not in the demo video — capture{' '}
+            <code>spectra run suite.yaml</code> in your terminal and we can add it to this kit.
+          </Alert>
+        </Col>
+      </Row>
+
+      <Row className="mb-5">
+        <Col xs={12}>
+          <h2 className="h4 fw-bold mb-3">
+            <FontAwesomeIcon icon={faImage} className="me-2" style={{ color: 'var(--color-accent)' }} />
+            Social banners (SVG)
           </h2>
           <Row xs={1} md={3} className="g-4">
             {marketingAssets.map((asset) => (

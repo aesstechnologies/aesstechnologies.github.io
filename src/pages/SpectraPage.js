@@ -14,6 +14,7 @@ import {
 import { spectraConfig } from '../config/spectra';
 import SpectraDownloadsSection from '../components/SpectraDownloadsSection';
 import SpectraDemoGif from '../components/SpectraDemoGif';
+import SpectraScreenshotGallery from '../components/SpectraScreenshotGallery';
 import usePageMeta from '../hooks/usePageMeta';
 import { absoluteUrl, siteConfig } from '../config/site';
 import { trackEvent } from '../services/analytics';
@@ -67,7 +68,7 @@ const SpectraPage = () => {
     title: seo.title,
     description: seo.description,
     canonicalPath: '/spectra',
-    ogImage: '/marketing/spectra-linkedin-banner.svg',
+    ogImage: '/og/spectra-social.png',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
@@ -253,6 +254,28 @@ const SpectraPage = () => {
             </Col>
           ))}
         </Row>
+      </Container>
+
+      {/* Product screenshots */}
+      <Container className="my-5 py-4">
+        <SpectraScreenshotGallery
+          ids={[
+            'run-graph',
+            'suite-editor',
+            'socket-step-detail',
+            'screen-assert',
+            'html-report',
+            'profile-activate-key',
+          ]}
+        />
+        <p className="text-center small mt-4 mb-0" style={{ color: 'var(--color-textMuted)' }}>
+          More assets for social posts:{' '}
+          <Link to="/spectra/marketing" style={{ color: 'var(--color-primary)' }}>
+            Marketing kit
+          </Link>
+          {' · '}
+          CLI screenshot coming soon — use <code>spectra run</code> in CI with the CLI tier.
+        </p>
       </Container>
 
       {/* Who it's for */}
