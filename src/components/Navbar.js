@@ -34,6 +34,7 @@ const Navigation = () => {
             <Nav.Link as={Link} to="/" onClick={handleLinkClick}>Home</Nav.Link>
             <Nav.Link as={Link} to="/about" onClick={handleLinkClick}>About Us</Nav.Link>
             <Nav.Link as={Link} to="/services" onClick={handleLinkClick}>Services</Nav.Link>
+            <Nav.Link as={Link} to="/spectra" onClick={handleLinkClick}>Spectra</Nav.Link>
             {features.enablePortfolio && (
               <Nav.Link as={Link} to="/portfolio" onClick={handleLinkClick}>Portfolio</Nav.Link>
             )}
