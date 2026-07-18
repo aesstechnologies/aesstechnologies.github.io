@@ -7,6 +7,7 @@ import customSoftwareImg from '../assets/customSoftware.jpg';
 import webdevImg from '../assets/webdev.jpg';
 import mobiledevImg from '../assets/mobiledev.jpg';
 import platformImg from '../assets/platform.jpg';
+import SpectraDemoGif from '../components/SpectraDemoGif';
 
 const HomePage = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -69,24 +70,15 @@ const HomePage = () => {
       </Container>
 
       {/* Spectra product spotlight */}
-      <Container className="mb-5 pb-2">
+      <Container className="mb-4 mb-md-5 pb-2">
         <Row className="justify-content-center">
-          <Col xs={12} lg={10}>
-            <Card
-              className="border-0 shadow-sm overflow-hidden"
-              style={{ backgroundColor: 'var(--color-surface)' }}
-            >
-              <Row className="g-0 align-items-center">
-                <Col xs={12} md={5}>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/spectra-demo.gif`}
-                    alt="Spectra dashboard run graph"
-                    className="w-100 d-block"
-                    loading="lazy"
-                    style={{ maxHeight: '280px', objectFit: 'cover' }}
-                  />
+          <Col xs={12} lg={10} xl={9}>
+            <Card className="home-spectra-spotlight border-0 shadow-sm">
+              <Row className="align-items-center">
+                <Col xs={12} md={5} lg={5} className="home-spectra-spotlight-media">
+                  <SpectraDemoGif alt="Spectra dashboard run graph" />
                 </Col>
-                <Col xs={12} md={7} className="p-4 p-md-5">
+                <Col xs={12} md={7} lg={7} className="home-spectra-spotlight-body">
                   <Badge
                     bg="secondary"
                     className="mb-3"
@@ -126,43 +118,33 @@ const HomePage = () => {
       </Container>
       
       {/* Full-width carousel with gradient overlay */}
-      <div className="carousel-wrapper position-relative">
-        <Row>
-          <Col xs={12} className="p-0">
-            {!imagesLoaded && (
-              <div 
-                className="carousel"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: 'var(--color-surface)',
-                }}
-              >
-                <div className="loading-spinner"></div>
-              </div>
-            )}
-            {imagesLoaded && (
-              <Carousel fade interval={5000} className="carousel">
-                {carouselItems.map((item, index) => (
-                  <Carousel.Item key={index}>
-                    <img
-                      className="d-block w-100 carousel-image"
-                      src={item.image}
-                      alt={item.title}
-                      loading={index === 0 ? "eager" : "lazy"}
-                    />
-                    <div className="carousel-gradient-overlay"></div>
-                    <Carousel.Caption className="carousel-caption-custom">
-                      <h3 className="display-5 fw-bold mb-3">{item.title}</h3>
-                      <p className="lead">{item.description}</p>
-                    </Carousel.Caption>
-                  </Carousel.Item>
-                ))}
-              </Carousel>
-            )}
-          </Col>
-        </Row>
+      <div className="carousel-wrapper">
+        {!imagesLoaded && (
+          <div className="carousel carousel-loading">
+            <div className="loading-spinner" />
+          </div>
+        )}
+        {imagesLoaded && (
+          <Carousel fade interval={5000} className="carousel">
+            {carouselItems.map((item, index) => (
+              <Carousel.Item key={index}>
+                <div className="carousel-media">
+                  <img
+                    className="carousel-image"
+                    src={item.image}
+                    alt={item.title}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
+                <div className="carousel-gradient-overlay" />
+                <Carousel.Caption className="carousel-caption-custom">
+                  <h3 className="display-6 fw-bold mb-2 mb-md-3">{item.title}</h3>
+                  <p className="lead mb-0">{item.description}</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        )}
       </div>
     </>
   );

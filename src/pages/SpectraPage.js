@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { spectraConfig } from '../config/spectra';
 import SpectraDownloadsSection from '../components/SpectraDownloadsSection';
+import SpectraDemoGif from '../components/SpectraDemoGif';
 
 const formatSek = (amount) =>
   new Intl.NumberFormat('sv-SE', {
@@ -177,20 +178,13 @@ const SpectraPage = () => {
             </div>
           </Col>
           <Col xs={12} lg={6}>
-            <div
+            <SpectraDemoGif
               className="spectra-demo rounded-3 overflow-hidden shadow-sm"
               style={{
                 backgroundColor: 'var(--color-surface)',
                 border: '1px solid var(--color-border)',
               }}
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/spectra-demo.gif`}
-                alt="Spectra dashboard showing YAML test suite run graph with UI, socket, and screen assert steps"
-                className="w-100 d-block"
-                loading="lazy"
-              />
-            </div>
+            />
           </Col>
         </Row>
       </Container>
