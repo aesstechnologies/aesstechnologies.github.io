@@ -7,6 +7,7 @@ import customSoftwareImg from '../assets/customSoftware.jpg';
 import webdevImg from '../assets/webdev.jpg';
 import mobiledevImg from '../assets/mobiledev.jpg';
 import platformImg from '../assets/platform.jpg';
+import SpectraDemoGif from '../components/SpectraDemoGif';
 
 const HomePage = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -78,12 +79,9 @@ const HomePage = () => {
             >
               <Row className="g-0 align-items-center">
                 <Col xs={12} md={5}>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/spectra-demo.gif`}
+                  <SpectraDemoGif
                     alt="Spectra dashboard run graph"
-                    className="w-100 d-block"
-                    loading="lazy"
-                    style={{ maxHeight: '280px', objectFit: 'cover' }}
+                    imgStyle={{ maxHeight: '280px', objectFit: 'cover' }}
                   />
                 </Col>
                 <Col xs={12} md={7} className="p-4 p-md-5">
