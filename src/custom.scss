@@ -336,51 +336,72 @@ body {
 .carousel-wrapper {
   position: relative;
   width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-bottom: 0; // Remove gap before footer
+  max-width: 100%;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+  margin-bottom: 0;
 }
 
-// Fixed carousel with aspect ratio (mobile-first) - full width, no gaps
+// Responsive carousel — avoids clipping on portrait/narrow viewports
 .carousel {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  aspect-ratio: 16 / 9;
-  max-height: 50vh;
-  overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: 0;
   position: relative;
-  
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  height: clamp(260px, 34vh, 420px);
+
   @media (min-width: 768px) {
-    max-height: 60vh;
+    height: clamp(320px, 42vh, 520px);
   }
-  
+
+  @media (orientation: portrait) and (max-width: 767.98px) {
+    height: clamp(280px, 36vh, 380px);
+  }
+
+  &.carousel-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface);
+  }
+
   // Hide arrows and indicators on mobile
   @media (max-width: 767.98px) {
     .carousel-control-prev,
     .carousel-control-next {
       display: none !important;
     }
-    
+
     .carousel-indicators {
       display: none !important;
     }
   }
-  
+
+  .carousel-media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+
   // Carousel images with opacity to reveal background
   .carousel-image {
-    opacity: 0.7;
+    display: block;
+    opacity: 0.72;
     object-fit: cover;
+    object-position: center center;
     width: 100%;
     height: 100%;
   }
-  
+
   // Gradient overlay on top of carousel to blend into background
   .carousel-gradient-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 30%;
+    height: 35%;
     background: linear-gradient(
       to bottom,
       var(--color-background) 0%,
@@ -389,50 +410,59 @@ body {
     pointer-events: none;
     z-index: 1;
   }
-  
-  // Custom carousel caption styling - centered vertically, edge to edge
+
+  // Custom carousel caption styling
   .carousel-caption-custom {
     position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    padding: 2rem 1rem;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.7) 40%,
-      rgba(0, 0, 0, 0.5) 60%,
+    left: 50%;
+    bottom: 0;
+    top: auto;
+    transform: translateX(-50%);
+    width: min(100%, 960px);
+    padding: 1.25rem 1rem 1.5rem;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.72) 55%,
       transparent 100%
     );
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
     text-align: center;
     z-index: 2;
-    width: 100%;
-    
+
     @media (min-width: 768px) {
-      padding: 2.5rem 2rem;
+      top: 50%;
+      bottom: auto;
+      transform: translate(-50%, -50%);
+      padding: 2rem 1.5rem;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.68) 45%,
+        rgba(0, 0, 0, 0.35) 70%,
+        transparent 100%
+      );
     }
-    
+
     @media (max-width: 767.98px) {
-      padding: 1.5rem 1rem;
-      
       h3 {
-        font-size: 1.5rem !important;
-        margin-bottom: 0.75rem !important;
+        font-size: clamp(1.15rem, 4.8vw, 1.5rem) !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.25;
       }
-      
+
       p {
-        font-size: 0.95rem !important;
+        font-size: clamp(0.85rem, 3.6vw, 0.98rem) !important;
+        line-height: 1.45;
       }
     }
-    
+
     h3 {
       color: #fff;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
-    
+
     p {
       color: rgba(255, 255, 255, 0.95);
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -482,21 +512,22 @@ body {
 .carousel-item {
   width: 100%;
   height: 100%;
+  min-height: inherit;
   position: relative;
-  
-  img {
+
+  .carousel-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    opacity: 0.6; // Allow background to show through
-    filter: contrast(0.3);
+    object-position: center center;
+    opacity: 0.62;
+    filter: contrast(0.35);
     transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
-  
-  &:hover img {
-    filter: contrast(0.4);
-    opacity: 0.7;
+
+  &:hover .carousel-media img {
+    filter: contrast(0.45);
+    opacity: 0.74;
   }
 }
 
@@ -605,6 +636,59 @@ body {
   @media (min-width: 768px) {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+}
+
+// Homepage Spectra spotlight card
+.home-spectra-spotlight {
+  overflow: hidden;
+  background-color: var(--color-surface);
+
+  .home-spectra-spotlight-media {
+    padding: 1rem 1rem 0.5rem;
+
+    @media (min-width: 768px) {
+      padding: 1.25rem 0.5rem 1.25rem 1.25rem;
+    }
+
+    @media (min-width: 992px) {
+      padding: 1.5rem 0.75rem 1.5rem 1.5rem;
+    }
+
+    .spectra-demo-gif-trigger {
+      border-radius: 0.75rem;
+      border: 1px solid var(--color-border);
+      background-color: var(--color-surfaceElevated);
+    }
+
+    .spectra-demo-gif-trigger img {
+      display: block;
+      width: 100%;
+      max-height: min(52vw, 320px);
+      object-fit: contain;
+      object-position: center;
+      background-color: var(--color-surfaceElevated);
+
+      @media (min-width: 768px) {
+        max-height: 260px;
+      }
+
+      @media (min-width: 992px) {
+        max-height: 280px;
+      }
+    }
+  }
+
+  .home-spectra-spotlight-body {
+    padding: 1rem 1.25rem 1.5rem;
+
+    @media (min-width: 768px) {
+      padding: 1.75rem 1.75rem 1.75rem 1rem;
+    }
+
+    @media (min-width: 992px) {
+      padding: 2rem 2rem 2rem 1.25rem;
+    }
   }
 }
 
