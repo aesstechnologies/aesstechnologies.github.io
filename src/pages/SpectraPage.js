@@ -10,20 +10,10 @@ import {
   faFileCode,
   faHeartPulse,
   faIndustry,
-  faLayerGroup,
   faPlay,
-  faPlug,
   faRobot,
-  faWrench,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  spectraDownloadUrl,
-  spectraPricing,
-  spectraPrimaryCta,
-  spectraSeo,
-  spectraStripeLinks,
-  spectraSupportEmail,
-} from '../config/spectra';
+import { spectraConfig } from '../config/spectra';
 
 const formatSek = (amount) =>
   new Intl.NumberFormat('sv-SE', {
@@ -67,8 +57,11 @@ const SectionHeading = ({ title, subtitle }) => (
 );
 
 const SpectraPage = () => {
+  const { seo, tiers, trialNote, supportEmail, portalUrl, downloadUrl, primaryCtaUrl } =
+    spectraConfig;
+
   useEffect(() => {
-    document.title = spectraSeo.title;
+    document.title = seo.title;
 
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) {
@@ -76,29 +69,26 @@ const SpectraPage = () => {
       meta.name = 'description';
       document.head.appendChild(meta);
     }
-    meta.content = spectraSeo.description;
+    meta.content = seo.description;
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = seo.canonical;
 
     return () => {
       document.title = 'AESS Technologies - Digitalization on Demand';
+      document.querySelector('link[rel="canonical"]')?.remove();
     };
-  }, []);
+  }, [seo]);
 
   const problemItems = [
-    {
-      icon: faLayerGroup,
-      title: 'Split tooling',
-      text: 'Browser automation, socket testing, and visual regression live in separate tools — hard to keep suites in sync.',
-    },
-    {
-      icon: faPlug,
-      title: 'Hard to simulate device events',
-      text: 'Real-time dashboards and operator UIs depend on Socket.IO and hardware signals that generic E2E frameworks ignore.',
-    },
-    {
-      icon: faWrench,
-      title: 'Slow QA–DevOps feedback',
-      text: 'Manual checks and brittle scripts delay releases when teams need fast, repeatable regression on live UIs.',
-    },
+    'Playwright alone misses socket payloads; socket scripts miss pixels',
+    'Device→UI events are hard to reproduce without hardware every run',
+    'QA and DevOps need one gate, not three separate tools',
   ];
 
   const howItWorksSteps = [
@@ -106,52 +96,49 @@ const SpectraPage = () => {
       step: 1,
       icon: faFileCode,
       title: 'Write YAML',
-      text: 'Define browser actions, socket events, and screen baselines in readable suite files.',
+      text: 'Define ui.*, socket.*, and screen.assert steps in one suite file.',
     },
     {
       step: 2,
       icon: faPlay,
       title: 'Run',
-      text: 'Execute from the CLI in CI or from the Spectra dashboard for interactive QA.',
+      text: 'Use the dashboard or run spectra run suite.yaml from CI.',
     },
     {
       step: 3,
       icon: faBolt,
       title: 'Inject & assert',
-      text: 'Simulate device events, capture screenshots, and compare against baselines automatically.',
+      text: 'Injector simulates device events; CV worker compares screenshots.',
     },
     {
       step: 4,
       icon: faEye,
       title: 'Report',
-      text: 'Get clear pass/fail results with visual diffs and logs your whole team can trust.',
+      text: 'HTML + JSON reports with evidence for every step.',
     },
   ];
 
   const audienceItems = [
     {
       icon: faHeartPulse,
-      title: 'Healthtech operator UIs',
-      text: 'Validate clinical and monitoring interfaces where accuracy and traceability matter.',
+      title: 'Healthtech & telehealth operator UIs',
     },
     {
       icon: faRobot,
       title: 'IoT & robotics dashboards',
-      text: 'Test control panels that react to live telemetry and command streams.',
     },
     {
       icon: faIndustry,
-      title: 'Real-time monitoring',
-      text: 'Regression-test Socket.IO dashboards and alerting views under realistic event loads.',
+      title: 'Real-time monitoring apps (Socket.IO today)',
     },
   ];
 
   const afterSubscribeSteps = [
-    'Check your email for a JWT license key (delivered by spectra-license-server).',
-    'Download the Spectra tarball from the release below.',
-    'Run npm run setup, then npm run ui to launch the dashboard.',
-    'Open Profile → Activate and paste your license key.',
-    `Need help? Email ${spectraSupportEmail}.`,
+    'Choose a plan and complete checkout via Stripe Payment Link.',
+    'Check your email for a JWT license key from spectra-license-server.',
+    'Download the Spectra tarball (link below when the first release is published).',
+    'Run npm run setup, then npm run ui → Profile → Subscription → Activate key.',
+    'Manage billing anytime via the Stripe Customer Portal.',
   ];
 
   return (
@@ -165,7 +152,7 @@ const SpectraPage = () => {
               className="mb-3 px-3 py-2"
               style={{ backgroundColor: 'var(--color-surfaceElevated) !important' }}
             >
-              Spectra by AESS Technologies
+              YAML-driven UI + socket + computer-vision regression for real-time web apps
             </Badge>
             <h1
               className="display-5 fw-bold mb-3"
@@ -174,17 +161,17 @@ const SpectraPage = () => {
               Test real-time UIs the way operators see them
             </h1>
             <p className="lead mb-4" style={{ color: 'var(--color-textSecondary)' }}>
-              YAML suites for browser actions, socket events, and screen baselines —
-              dashboard for QA, CLI for CI.
+              Spectra runs browser actions, socket events, and screen baselines in one YAML
+              suite — with a dashboard for QA and a CLI for CI.
             </p>
             <div className="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
-              <StripeLink href={spectraPrimaryCta}>Start 30-day trial</StripeLink>
+              <StripeLink href={primaryCtaUrl}>Start 30-day trial</StripeLink>
               <Button variant="outline-primary" href="#pricing">
                 View pricing
               </Button>
               <Button
                 variant="link"
-                href={`mailto:${spectraSupportEmail}`}
+                href={`mailto:${supportEmail}`}
                 style={{ color: 'var(--color-primary)' }}
               >
                 Contact sales
@@ -217,34 +204,20 @@ const SpectraPage = () => {
 
       {/* Problem */}
       <Container className="my-5 py-4">
-        <SectionHeading
-          title="Why teams need Spectra"
-          subtitle="Operator-facing UIs need more than click-and-wait automation."
-        />
-        <Row xs={1} md={3} className="g-4">
-          {problemItems.map((item) => (
-            <Col key={item.title}>
-              <Card
-                className="h-100 text-center shadow-sm border-0"
-                style={{ backgroundColor: 'var(--color-surface)' }}
-              >
-                <Card.Body className="p-4">
-                  <FontAwesomeIcon
-                    icon={item.icon}
-                    size="2x"
-                    className="mb-3"
-                    style={{ color: 'var(--color-primary)' }}
-                  />
-                  <Card.Title as="h3" className="h5 fw-bold">
-                    {item.title}
-                  </Card.Title>
-                  <Card.Text style={{ color: 'var(--color-textSecondary)' }}>
-                    {item.text}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
+        <SectionHeading title="Why teams need Spectra" />
+        <Row className="justify-content-center">
+          <Col xs={12} md={10} lg={8}>
+            <ul
+              className="list-unstyled mb-0"
+              style={{ color: 'var(--color-textSecondary)', lineHeight: 1.9 }}
+            >
+              {problemItems.map((item) => (
+                <li key={item} className="mb-3 ps-3 border-start border-3" style={{ borderColor: 'var(--color-accent) !important' }}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Col>
         </Row>
       </Container>
 
@@ -310,9 +283,6 @@ const SpectraPage = () => {
                   <Card.Title as="h3" className="h5 fw-bold d-inline">
                     {item.title}
                   </Card.Title>
-                  <Card.Text className="mt-2 mb-0" style={{ color: 'var(--color-textSecondary)' }}>
-                    {item.text}
-                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -322,10 +292,7 @@ const SpectraPage = () => {
 
       {/* Pricing */}
       <Container id="pricing" className="my-5 py-4 scroll-margin-top">
-        <SectionHeading
-          title="Pricing"
-          subtitle="All plans include a 30-day free trial. Prices in SEK."
-        />
+        <SectionHeading title="Pricing" subtitle={trialNote} />
         <Row className="justify-content-center">
           <Col xs={12} xl={10}>
             <div className="table-responsive">
@@ -341,13 +308,14 @@ const SpectraPage = () => {
                   <tr style={{ borderColor: 'var(--color-border)' }}>
                     <th>Tier</th>
                     <th>For</th>
+                    <th>Includes</th>
                     <th>Monthly</th>
                     <th>Annual</th>
                     <th className="text-center">Subscribe</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {spectraPricing.map((tier) => (
+                  {tiers.map((tier) => (
                     <tr
                       key={tier.id}
                       style={{
@@ -365,15 +333,18 @@ const SpectraPage = () => {
                           </Badge>
                         )}
                       </td>
-                      <td style={{ color: 'var(--color-textSecondary)' }}>{tier.audience}</td>
-                      <td>{formatSek(tier.monthly)}/mo</td>
-                      <td>{formatSek(tier.annual)}/yr</td>
+                      <td style={{ color: 'var(--color-textSecondary)' }}>{tier.for}</td>
+                      <td style={{ color: 'var(--color-textSecondary)', fontSize: '0.9rem' }}>
+                        {tier.includes}
+                      </td>
+                      <td>{formatSek(tier.monthlySek)}/mo</td>
+                      <td>{formatSek(tier.annualSek)}/yr</td>
                       <td>
                         <div className="d-flex flex-wrap gap-2 justify-content-center">
-                          <StripeLink href={tier.stripeMonthly} size="sm">
+                          <StripeLink href={tier.monthlyUrl} size="sm">
                             Monthly
                           </StripeLink>
-                          <StripeLink href={tier.stripeAnnual} variant="outline-primary" size="sm">
+                          <StripeLink href={tier.annualUrl} variant="outline-primary" size="sm">
                             Annual
                           </StripeLink>
                         </div>
@@ -386,7 +357,7 @@ const SpectraPage = () => {
             <p className="text-center mt-4 mb-0 small" style={{ color: 'var(--color-textMuted)' }}>
               Manage billing anytime via the{' '}
               <a
-                href={spectraStripeLinks.customerPortal}
+                href={portalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: 'var(--color-primary)' }}
@@ -401,7 +372,17 @@ const SpectraPage = () => {
 
       {/* After you subscribe */}
       <Container className="my-5 py-4">
-        <SectionHeading title="After you subscribe" />
+        <SectionHeading
+          title="After you subscribe"
+          subtitle={
+            <>
+              Just completed checkout?{' '}
+              <Link to="/spectra/welcome" style={{ color: 'var(--color-primary)' }}>
+                View setup instructions
+              </Link>
+            </>
+          }
+        />
         <Row className="justify-content-center">
           <Col xs={12} md={8} lg={6}>
             <ol
@@ -426,13 +407,25 @@ const SpectraPage = () => {
         />
         <Row className="justify-content-center">
           <Col xs={12} className="text-center">
-            <Button variant="secondary" disabled size="lg">
-              <FontAwesomeIcon icon={faCode} className="me-2" />
-              Download Spectra Full (Linux) — Coming soon
-            </Button>
-            <p className="mt-3 small mb-0" style={{ color: 'var(--color-textMuted)' }}>
-              Release URL placeholder: {spectraDownloadUrl}
-            </p>
+            {downloadUrl ? (
+              <Button
+                as="a"
+                href={downloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+                size="lg"
+                style={{ backgroundColor: 'var(--color-accent)', borderColor: 'var(--color-accent)' }}
+              >
+                <FontAwesomeIcon icon={faCode} className="me-2" />
+                Download Spectra Full (Linux)
+              </Button>
+            ) : (
+              <Button variant="secondary" disabled size="lg">
+                <FontAwesomeIcon icon={faCode} className="me-2" />
+                Download Spectra Full (Linux) — Coming soon
+              </Button>
+            )}
           </Col>
         </Row>
       </Container>
@@ -447,7 +440,7 @@ const SpectraPage = () => {
               </Link>
               {' · '}
               <a
-                href={spectraStripeLinks.customerPortal}
+                href={portalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: 'var(--color-primary)' }}
@@ -456,15 +449,15 @@ const SpectraPage = () => {
               </a>
               {' · '}
               <a
-                href={`mailto:${spectraSupportEmail}`}
+                href={`mailto:${supportEmail}`}
                 style={{ color: 'var(--color-primary)' }}
               >
-                {spectraSupportEmail}
+                {supportEmail}
               </a>
             </p>
-            {/* TODO: Link Terms and Privacy pages when added site-wide before go-live */}
+            {/* TODO: Link Terms, Privacy, and Refund policy pages before live checkout CTAs */}
             <p className="small mb-0" style={{ color: 'var(--color-textMuted)' }}>
-              Terms &amp; Privacy pages — coming soon
+              Terms, Privacy &amp; Refund policy — coming soon
             </p>
           </Col>
         </Row>

@@ -1,59 +1,68 @@
 /**
  * Spectra product configuration — Stripe Payment Links and pricing.
+ * Source of truth: SpectraUI docs/WEBSITE_INTEGRATION.md
  * No secret keys; public Payment Link URLs only.
  */
 
-export const spectraSupportEmail = 'hello@aesstechnologies.com';
+export const spectraConfig = {
+  trialNote: '30-day trial on all plans · prices excl. VAT where applicable',
+  supportEmail: 'hello@aesstechnologies.com',
+  portalUrl: 'https://billing.stripe.com/p/login/cNi3cvavt7Zi5LyatC7N600',
+  /** Set when first GitHub Release tarball is published */
+  downloadUrl: null,
+  primaryCtaUrl: 'https://buy.stripe.com/5kQ9AT3311AUfm8atC7N602',
+  seo: {
+    title: 'Spectra — UI + socket + vision regression testing | AESS Technologies',
+    description:
+      'YAML test suites for real-time operator UIs. Socket inject, Playwright, and CV baselines in one report. 30-day trial.',
+    canonical: 'https://aesstechnologies.com/spectra',
+  },
+  welcomeSeo: {
+    title: 'Welcome to Spectra | AESS Technologies',
+    description:
+      'Your Spectra trial has started. Install, activate your license key, and start testing real-time operator UIs.',
+  },
+  tiers: [
+    {
+      id: 'cli',
+      name: 'CLI',
+      for: 'CI pipelines',
+      includes: 'spectra run, JSON/HTML reports',
+      monthlySek: 49,
+      annualSek: 490,
+      monthlyUrl: 'https://buy.stripe.com/8x23cveLJ5Rac9WfNW7N605',
+      annualUrl: 'https://buy.stripe.com/fZufZhgTR0wQde0eJS7N606',
+    },
+    {
+      id: 'ui',
+      name: 'UI',
+      for: 'QA operators',
+      includes: 'Dashboard, suite builder, exports',
+      monthlySek: 59,
+      annualSek: 590,
+      monthlyUrl: 'https://buy.stripe.com/3cI3cvgTR5Ra4Hu0T27N603',
+      annualUrl: 'https://buy.stripe.com/00w5kD8nl4N63Dq31a7N604',
+    },
+    {
+      id: 'full',
+      name: 'Full',
+      for: 'Product teams',
+      includes: 'CLI + UI + injector + CV worker',
+      monthlySek: 69,
+      annualSek: 690,
+      monthlyUrl: 'https://buy.stripe.com/5kQ9AT3311AUfm8atC7N602',
+      annualUrl: 'https://buy.stripe.com/eVq6oHgTR6Ve0re59i7N601',
+      highlighted: true,
+    },
+  ],
+};
 
+/** @deprecated Use spectraConfig — kept for minimal import churn */
+export const spectraSupportEmail = spectraConfig.supportEmail;
 export const spectraStripeLinks = {
-  cliMonthly: 'https://buy.stripe.com/8x23cveLJ5Rac9WfNW7N605',
-  uiMonthly: 'https://buy.stripe.com/3cI3cvgTR5Ra4Hu0T27N603',
-  fullMonthly: 'https://buy.stripe.com/5kQ9AT3311AUfm8atC7N602',
-  cliAnnual: 'https://buy.stripe.com/fZufZhgTR0wQde0eJS7N606',
-  uiAnnual: 'https://buy.stripe.com/00w5kD8nl4N63Dq31a7N604',
-  fullAnnual: 'https://buy.stripe.com/eVq6oHgTR6Ve0re59i7N601',
-  customerPortal: 'https://billing.stripe.com/p/login/cNi3cvavt7Zi5LyatC7N600',
+  customerPortal: spectraConfig.portalUrl,
 };
-
-export const spectraSeo = {
-  title: 'Spectra — Real-time UI Testing | AESS Technologies',
-  description:
-    'YAML-driven UI regression testing for browser actions, socket events, and screen baselines. CLI for CI pipelines, dashboard for QA operators. 30-day free trial on all plans.',
-};
-
-export const spectraPricing = [
-  {
-    id: 'cli',
-    name: 'CLI',
-    monthly: 49,
-    annual: 490,
-    audience: 'CI pipelines',
-    stripeMonthly: spectraStripeLinks.cliMonthly,
-    stripeAnnual: spectraStripeLinks.cliAnnual,
-  },
-  {
-    id: 'ui',
-    name: 'UI',
-    monthly: 59,
-    annual: 590,
-    audience: 'QA operators',
-    stripeMonthly: spectraStripeLinks.uiMonthly,
-    stripeAnnual: spectraStripeLinks.uiAnnual,
-  },
-  {
-    id: 'full',
-    name: 'Full',
-    monthly: 69,
-    annual: 690,
-    audience: 'Teams (CLI + UI + injector + CV)',
-    stripeMonthly: spectraStripeLinks.fullMonthly,
-    stripeAnnual: spectraStripeLinks.fullAnnual,
-    highlighted: true,
-  },
-];
-
-/** Primary hero CTA — Full tier monthly with 30-day trial */
-export const spectraPrimaryCta = spectraStripeLinks.fullMonthly;
-
-/** GitHub Release download URL — replace when first release is published */
-export const spectraDownloadUrl = '#download';
+export const spectraSeo = spectraConfig.seo;
+export const spectraPricing = spectraConfig.tiers;
+export const spectraPrimaryCta = spectraConfig.primaryCtaUrl;
+export const spectraDownloadUrl = spectraConfig.downloadUrl;
