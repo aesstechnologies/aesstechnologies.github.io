@@ -1,0 +1,13 @@
+{
+  "tier": "full",
+  "version": null,
+  "buildNumber": null,
+  "publishedAt": null,
+  "sourceTag": null,
+  "sourceRunId": null,
+  "downloads": {
+    "linux": null,
+    "macos": null,
+    "windows": null
+  }
+}

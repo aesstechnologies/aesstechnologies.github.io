@@ -83,6 +83,21 @@ body {
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
+// Legal page content
+.legal-content {
+  h2 {
+    color: var(--color-text);
+  }
+
+  a {
+    color: var(--color-primary);
+  }
+
+  ul {
+    padding-left: 1.25rem;
+  }
+}
+
 // Anchor scroll offset for sticky navbar
 .scroll-margin-top {
   scroll-margin-top: 6rem;

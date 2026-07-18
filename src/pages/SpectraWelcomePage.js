@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { spectraConfig } from '../config/spectra';
+import SpectraDownloadButtons from '../components/SpectraDownloadButtons';
+import { useSpectraDownloads } from '../hooks/useSpectraDownloads';
 
 const SpectraWelcomePage = () => {
   useEffect(() => {
@@ -22,7 +24,9 @@ const SpectraWelcomePage = () => {
     };
   }, []);
 
-  const { supportEmail, portalUrl, downloadUrl } = spectraConfig;
+  const { supportEmail, portalUrl } = spectraConfig;
+  const { downloads, hasDownloads } = useSpectraDownloads();
+  const linuxDownload = downloads.linux?.url;
 
   return (
     <Container className="my-5">
@@ -54,8 +58,8 @@ const SpectraWelcomePage = () => {
                 </li>
                 <li className="mb-3">
                   <strong>Download Spectra</strong> —{' '}
-                  {downloadUrl ? (
-                    <a href={downloadUrl} target="_blank" rel="noopener noreferrer">
+                  {hasDownloads && linuxDownload ? (
+                    <a href={linuxDownload} target="_blank" rel="noopener noreferrer">
                       Download Spectra Full (Linux)
                     </a>
                   ) : (
@@ -90,14 +94,7 @@ const SpectraWelcomePage = () => {
             </Alert>
 
             <div className="d-flex gap-2 justify-content-center flex-wrap">
-              <Button
-                as={Link}
-                to="/spectra#download"
-                variant="primary"
-                style={{ backgroundColor: 'var(--color-accent)', borderColor: 'var(--color-accent)' }}
-              >
-                Download Spectra
-              </Button>
+              <SpectraDownloadButtons size="md" />
               <Button as="a" href={`mailto:${supportEmail}`} variant="secondary">
                 Get help
               </Button>
