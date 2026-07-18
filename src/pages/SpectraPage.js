@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Container, Row, Col, Card, Button, Table, Badge } from 'react-bootstrap';
+import React from 'react';
+import { Container, Row, Col, Card, Button, Table, Badge, Accordion } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -14,6 +14,9 @@ import {
 import { spectraConfig } from '../config/spectra';
 import SpectraDownloadsSection from '../components/SpectraDownloadsSection';
 import SpectraDemoGif from '../components/SpectraDemoGif';
+import usePageMeta from '../hooks/usePageMeta';
+import { absoluteUrl, siteConfig } from '../config/site';
+import { trackEvent } from '../services/analytics';
 
 const formatSek = (amount) =>
   new Intl.NumberFormat('sv-SE', {
@@ -22,7 +25,7 @@ const formatSek = (amount) =>
     minimumFractionDigits: 0,
   }).format(amount);
 
-const StripeLink = ({ href, children, variant = 'primary', size, className = '' }) => (
+const StripeLink = ({ href, children, variant = 'primary', size, className = '', eventProps = {} }) => (
   <Button
     as="a"
     href={href}
@@ -31,6 +34,7 @@ const StripeLink = ({ href, children, variant = 'primary', size, className = '' 
     variant={variant}
     size={size}
     className={className}
+    onClick={() => trackEvent('spectra_trial_click', eventProps)}
     style={
       variant === 'primary'
         ? { backgroundColor: 'var(--color-accent)', borderColor: 'var(--color-accent)' }
@@ -57,32 +61,33 @@ const SectionHeading = ({ title, subtitle }) => (
 );
 
 const SpectraPage = () => {
-  const { seo, tiers, trialNote, supportEmail, portalUrl, primaryCtaUrl } = spectraConfig;
+  const { seo, tiers, trialNote, supportEmail, portalUrl, primaryCtaUrl, faq } = spectraConfig;
 
-  useEffect(() => {
-    document.title = seo.title;
-
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = seo.description;
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.rel = 'canonical';
-      document.head.appendChild(canonical);
-    }
-    canonical.href = seo.canonical;
-
-    return () => {
-      document.title = 'AESS Technologies - Digitalization on Demand';
-      document.querySelector('link[rel="canonical"]')?.remove();
-    };
-  }, [seo]);
+  usePageMeta({
+    title: seo.title,
+    description: seo.description,
+    canonicalPath: '/spectra',
+    ogImage: '/marketing/spectra-linkedin-banner.svg',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Spectra',
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Linux, macOS, Windows',
+      offers: {
+        '@type': 'Offer',
+        price: '49',
+        priceCurrency: 'SEK',
+        description: '30-day free trial on all plans',
+      },
+      provider: {
+        '@type': 'Organization',
+        name: siteConfig.name,
+        url: siteConfig.url,
+      },
+      url: absoluteUrl('/spectra'),
+    },
+  });
 
   const problemItems = [
     'Playwright alone misses socket payloads; socket scripts miss pixels',
@@ -164,7 +169,9 @@ const SpectraPage = () => {
               suite — with a dashboard for QA and a CLI for CI.
             </p>
             <div className="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
-              <StripeLink href={primaryCtaUrl}>Start 30-day trial</StripeLink>
+              <StripeLink href={primaryCtaUrl} eventProps={{ source: 'hero', tier: 'full' }}>
+                Start 30-day trial
+              </StripeLink>
               <Button variant="outline-primary" href="#pricing">
                 View pricing
               </Button>
@@ -328,10 +335,10 @@ const SpectraPage = () => {
                       <td>{formatSek(tier.annualSek)}/yr</td>
                       <td>
                         <div className="d-flex flex-wrap gap-2 justify-content-center">
-                          <StripeLink href={tier.monthlyUrl} size="sm">
+                          <StripeLink href={tier.monthlyUrl} size="sm" eventProps={{ source: 'pricing', tier: tier.id, plan: 'monthly' }}>
                             Monthly
                           </StripeLink>
-                          <StripeLink href={tier.annualUrl} variant="outline-primary" size="sm">
+                          <StripeLink href={tier.annualUrl} variant="outline-primary" size="sm" eventProps={{ source: 'pricing', tier: tier.id, plan: 'annual' }}>
                             Annual
                           </StripeLink>
                         </div>
@@ -347,6 +354,7 @@ const SpectraPage = () => {
                 href={portalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('spectra_portal_click', { source: 'pricing' })}
                 style={{ color: 'var(--color-primary)' }}
               >
                 Stripe Customer Portal
@@ -386,6 +394,42 @@ const SpectraPage = () => {
         </Row>
       </Container>
 
+      {/* FAQ */}
+      <Container id="faq" className="my-5 py-4 scroll-margin-top">
+        <SectionHeading title="FAQ" subtitle="Trial, downloads, license keys, and CI" />
+        <Row className="justify-content-center">
+          <Col xs={12} lg={8}>
+            <Accordion defaultActiveKey="0" flush>
+              {faq.map((item, index) => (
+                <Accordion.Item
+                  key={item.question}
+                  eventKey={String(index)}
+                  style={{
+                    backgroundColor: 'var(--color-surface)',
+                    borderColor: 'var(--color-border)',
+                  }}
+                >
+                  <Accordion.Header>{item.question}</Accordion.Header>
+                  <Accordion.Body style={{ color: 'var(--color-textSecondary)' }}>
+                    {item.answer}
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+            <p className="text-center mt-4 mb-0 small" style={{ color: 'var(--color-textMuted)' }}>
+              Read our{' '}
+              <Link to="/blog/ui-testing-frameworks-modern-era" style={{ color: 'var(--color-primary)' }}>
+                guide to modern UI testing frameworks
+              </Link>
+              {' · '}
+              <Link to="/spectra/marketing" style={{ color: 'var(--color-primary)' }}>
+                Marketing kit
+              </Link>
+            </p>
+          </Col>
+        </Row>
+      </Container>
+
       {/* Download */}
       <Container id="download" className="my-5 py-4 scroll-margin-top">
         <SectionHeading
@@ -408,6 +452,7 @@ const SpectraPage = () => {
                 href={portalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('spectra_portal_click', { source: 'footer' })}
                 style={{ color: 'var(--color-primary)' }}
               >
                 Customer Portal

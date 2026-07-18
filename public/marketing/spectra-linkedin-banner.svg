@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628" role="img" aria-label="Spectra by AESS Technologies">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <clipPath id="leftColumnClip">
+      <rect x="0" y="0" width="688" height="560"/>
+    </clipPath>
+  </defs>
+  <rect width="1200" height="628" fill="url(#bg)"/>
+  <rect x="0" y="580" width="1200" height="48" fill="url(#accent)" opacity="0.25"/>
+
+  <!-- Left column: headline + CTA (clipped so nothing runs under the panel) -->
+  <g clip-path="url(#leftColumnClip)">
+    <text x="56" y="108" fill="#94a3b8" font-family="system-ui,Segoe UI,sans-serif" font-size="20" letter-spacing="4">AESS TECHNOLOGIES</text>
+    <text x="56" y="210" fill="#f8fafc" font-family="system-ui,Segoe UI,sans-serif" font-size="64" font-weight="700">Spectra</text>
+    <text x="56" y="268" fill="#cbd5e1" font-family="system-ui,Segoe UI,sans-serif" font-size="24">
+      <tspan x="56" dy="0">YAML-driven UI, socket,</tspan>
+      <tspan x="56" dy="32">and computer-vision regression</tspan>
+    </text>
+    <text x="56" y="360" fill="#94a3b8" font-family="system-ui,Segoe UI,sans-serif" font-size="21">
+      <tspan x="56" dy="0">Real-time operator dashboards</tspan>
+      <tspan x="56" dy="28">30-day free trial</tspan>
+    </text>
+    <rect x="56" y="420" width="340" height="52" rx="26" fill="url(#accent)"/>
+    <text x="226" y="453" fill="#0f172a" font-family="system-ui,Segoe UI,sans-serif" font-size="20" font-weight="700" text-anchor="middle">www.aesstechnologies.com/spectra</text>
+  </g>
+
+  <!-- Right panel -->
+  <rect x="728" y="72" width="416" height="484" rx="16" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="768" y="132" fill="#f97316" font-family="ui-monospace,monospace" font-size="20">steps:</text>
+  <text x="768" y="178" fill="#e2e8f0" font-family="ui-monospace,monospace" font-size="17">
+    <tspan x="768" dy="0">- ui.goto: /dashboard</tspan>
+    <tspan x="768" dy="28">- socket.emit: device.fault</tspan>
+    <tspan x="768" dy="28">- screen.assert: alert.png</tspan>
+  </text>
+  <text x="768" y="310" fill="#cbd5e1" font-family="system-ui,Segoe UI,sans-serif" font-size="20">
+    <tspan x="768" dy="0">One suite</tspan>
+    <tspan x="768" dy="28">One CI gate</tspan>
+  </text>
+</svg>

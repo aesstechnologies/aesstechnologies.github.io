@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { trackEvent } from '../services/analytics';
 import {
   useSpectraDownloads,
   spectraDownloadLabels,
@@ -84,6 +85,12 @@ const SpectraDownloadButtons = ({
                     rel="noopener noreferrer"
                     variant="primary"
                     size={size}
+                    onClick={() =>
+                      trackEvent('spectra_download_click', {
+                        tier: tierId,
+                        platform,
+                      })
+                    }
                     style={{
                       backgroundColor: 'var(--color-accent)',
                       borderColor: 'var(--color-accent)',

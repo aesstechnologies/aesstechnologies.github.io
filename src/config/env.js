@@ -17,7 +17,7 @@ export const config = {
   // Feature Flags
   features: {
     enableBlog: getBooleanEnvVar('REACT_APP_ENABLE_BLOG', true),
-    enablePortfolio: getBooleanEnvVar('REACT_APP_ENABLE_PORTFOLIO', true),
+    enablePortfolio: getBooleanEnvVar('REACT_APP_ENABLE_PORTFOLIO', false),
     enableNewsletter: getBooleanEnvVar('REACT_APP_ENABLE_NEWSLETTER', false),
   },
 
