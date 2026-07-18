@@ -77,12 +77,14 @@ const SpectraDemoGif = ({
             >
               ×
             </button>
-            <img
-              src={SPECTRA_DEMO_SRC}
-              alt={alt}
-              className="spectra-demo-lightbox-image"
-              onClick={(event) => event.stopPropagation()}
-            />
+            <div className="spectra-demo-lightbox-stage">
+              <img
+                src={SPECTRA_DEMO_SRC}
+                alt={alt}
+                className="spectra-demo-lightbox-image"
+                onClick={(event) => event.stopPropagation()}
+              />
+            </div>
             <p className="spectra-demo-lightbox-caption">Press Esc to close</p>
           </div>,
           document.body,
