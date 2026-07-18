@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { config } from '../config/env';
+import { siteConfig } from '../config/site';
 
 const Footer = () => {
   const { features } = config;
@@ -17,8 +18,18 @@ const Footer = () => {
               Digitalization on Demand
             </p>
             <p className="text-muted small mt-2 mb-0">
-              Liberagatan 32<br />
-              417 52 Göteborg, Sweden
+              {siteConfig.address.street}<br />
+              {siteConfig.address.postalCode} {siteConfig.address.city}, {siteConfig.address.country}
+            </p>
+            <p className="text-muted small mt-2 mb-0">
+              <a href={`mailto:${siteConfig.contactEmail}`} className="text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
+                {siteConfig.contactEmail}
+              </a>
+              <br />
+              <a href={`mailto:${siteConfig.licensesEmail}`} className="text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
+                {siteConfig.licensesEmail}
+              </a>
+              <span className="text-muted"> (Spectra licenses)</span>
             </p>
           </Col>
           <Col xs={12} md={4} className="mb-4 mb-md-0">
@@ -51,13 +62,16 @@ const Footer = () => {
                   </Link>
                 </li>
               )}
-              {features.enableBlog && (
-                <li className="mb-2">
-                  <Link to="/blog" className="text-muted text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
-                    Blog
-                  </Link>
-                </li>
-              )}
+              <li className="mb-2">
+                <Link to="/blog" className="text-muted text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
+                  Blog
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link to="/spectra/marketing" className="text-muted text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
+                  Spectra marketing kit
+                </Link>
+              </li>
               <li className="mb-2">
                 <Link to="/contact" className="text-muted text-decoration-none" style={{ color: 'var(--color-textSecondary)' }}>
                   Contact Us

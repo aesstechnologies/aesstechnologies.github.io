@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628" role="img" aria-label="Spectra by AESS Technologies">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="628" fill="url(#bg)"/>
+  <rect x="0" y="580" width="1200" height="48" fill="url(#accent)" opacity="0.25"/>
+  <text x="64" y="120" fill="#94a3b8" font-family="system-ui,Segoe UI,sans-serif" font-size="22" letter-spacing="4">AESS TECHNOLOGIES</text>
+  <text x="64" y="240" fill="#f8fafc" font-family="system-ui,Segoe UI,sans-serif" font-size="72" font-weight="700">Spectra</text>
+  <text x="64" y="310" fill="#cbd5e1" font-family="system-ui,Segoe UI,sans-serif" font-size="28">YAML-driven UI, socket, and computer-vision regression</text>
+  <text x="64" y="360" fill="#94a3b8" font-family="system-ui,Segoe UI,sans-serif" font-size="24">Real-time operator dashboards · 30-day free trial</text>
+  <rect x="64" y="400" width="320" height="52" rx="26" fill="url(#accent)"/>
+  <text x="224" y="434" fill="#0f172a" font-family="system-ui,Segoe UI,sans-serif" font-size="22" font-weight="700" text-anchor="middle">aesstechnologies.com/spectra</text>
+  <rect x="720" y="80" width="416" height="468" rx="16" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="760" y="140" fill="#f97316" font-family="ui-monospace,monospace" font-size="20">steps:</text>
+  <text x="760" y="190" fill="#e2e8f0" font-family="ui-monospace,monospace" font-size="18">- ui.goto: /dashboard</text>
+  <text x="760" y="230" fill="#e2e8f0" font-family="ui-monospace,monospace" font-size="18">- socket.emit: device.fault</text>
+  <text x="760" y="270" fill="#e2e8f0" font-family="ui-monospace,monospace" font-size="18">- screen.assert: alert.png</text>
+  <text x="760" y="340" fill="#94a3b8" font-family="system-ui,Segoe UI,sans-serif" font-size="22">One suite · One CI gate</text>
+</svg>

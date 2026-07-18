@@ -15,7 +15,7 @@ export const spectraConfig = {
     title: 'Spectra — UI + socket + vision regression testing | AESS Technologies',
     description:
       'YAML test suites for real-time operator UIs. Socket inject, Playwright, and CV baselines in one report. 30-day trial.',
-    canonical: 'https://aesstechnologies.com/spectra',
+    canonical: 'https://www.aesstechnologies.com/spectra',
   },
   welcomeSeo: {
     title: 'Welcome to Spectra | AESS Technologies',
@@ -53,6 +53,38 @@ export const spectraConfig = {
       monthlyUrl: 'https://buy.stripe.com/5kQ9AT3311AUfm8atC7N602',
       annualUrl: 'https://buy.stripe.com/eVq6oHgTR6Ve0re59i7N601',
       highlighted: true,
+    },
+  ],
+  faq: [
+    {
+      question: 'How does the 30-day trial work?',
+      answer:
+        'Choose a plan and complete checkout via Stripe. Your trial starts immediately. You will receive a license key by email within a few minutes. Cancel anytime during the trial from the Stripe Customer Portal.',
+    },
+    {
+      question: 'Which download matches my plan?',
+      answer:
+        'CLI subscribers download the CLI build. UI subscribers download the UI build. Full includes CLI, dashboard, injector, and computer-vision worker — download the Full package.',
+    },
+    {
+      question: 'Where is my license key?',
+      answer:
+        'It is emailed to the address you used at Stripe checkout from licenses@aesstechnologies.com. Check spam. Allow up to five minutes after payment.',
+    },
+    {
+      question: 'Can I run Spectra in CI?',
+      answer:
+        'Yes. CLI and Full tiers include the spectra run command for headless pipelines. The same YAML suites run in the dashboard and in CI.',
+    },
+    {
+      question: 'What stack does Spectra require?',
+      answer:
+        'Node 20+, Python 3.11+, and Chromium (installed via Playwright during setup). Linux, macOS, and Windows builds are available.',
+    },
+    {
+      question: 'How is Spectra different from Playwright alone?',
+      answer:
+        'Playwright excels at browser automation. Spectra adds socket event injection and screen baselines in the same YAML suite — built for real-time operator dashboards, not static forms.',
     },
   ],
 };

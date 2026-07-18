@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,23 +6,15 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { spectraConfig } from '../config/spectra';
 import SpectraDownloadButtons from '../components/SpectraDownloadButtons';
 import { SPECTRA_TIER_META, SPECTRA_TIER_ORDER } from '../hooks/useSpectraDownloads';
+import usePageMeta from '../hooks/usePageMeta';
 
 const SpectraWelcomePage = () => {
-  useEffect(() => {
-    document.title = spectraConfig.welcomeSeo.title;
-
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = spectraConfig.welcomeSeo.description;
-
-    return () => {
-      document.title = 'AESS Technologies - Digitalization on Demand';
-    };
-  }, []);
+  usePageMeta({
+    title: spectraConfig.welcomeSeo.title,
+    description: spectraConfig.welcomeSeo.description,
+    canonicalPath: '/spectra/welcome',
+    noIndex: true,
+  });
 
   const { supportEmail, portalUrl } = spectraConfig;
 

@@ -639,6 +639,14 @@ body {
   }
 }
 
+.blog-article code {
+  color: var(--color-accent);
+}
+
+.blog-article pre {
+  border: 1px solid var(--color-border);
+}
+
 // Homepage Spectra spotlight card
 .home-spectra-spotlight {
   overflow: hidden;

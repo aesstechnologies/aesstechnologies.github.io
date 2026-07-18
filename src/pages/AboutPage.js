@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPeopleGroup, faRankingStar, faArrowTrendUp, faBrain } from "@fortawesome/free-solid-svg-icons";
@@ -42,7 +43,7 @@ const AboutPage = () => {
                 well-equipped to solve complex problems and adapt to the unique
                 needs of each client.
               </Card.Text>
-              <Button variant="primary">See profiles</Button>
+              <Button as={Link} to="/contact" variant="primary">Contact us</Button>
             </Card.Body>
           </Card>
         </Col>

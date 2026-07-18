@@ -17,6 +17,9 @@ const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const SpectraPage = lazy(() => import('./pages/SpectraPage'));
 const SpectraWelcomePage = lazy(() => import('./pages/SpectraWelcomePage'));
+const SpectraMarketingPage = lazy(() => import('./pages/SpectraMarketingPage'));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const RefundPolicyPage = lazy(() => import('./pages/RefundPolicyPage'));
@@ -78,6 +81,8 @@ function App() {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/spectra" element={<SpectraPage />} />
                 <Route path="/spectra/welcome" element={<SpectraWelcomePage />} />
+                <Route path="/spectra/marketing" element={<SpectraMarketingPage />} />
+                <Route path="/blog/:slug" element={<BlogPostPage />} />
                 <Route path="/terms" element={<TermsPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/refund-policy" element={<RefundPolicyPage />} />
@@ -91,7 +96,7 @@ function App() {
                   <Route path="/blog" element={<BlogPage />} />
                 )}
                 {/* 404 fallback */}
-                <Route path="*" element={<HomePage />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>
           </div>

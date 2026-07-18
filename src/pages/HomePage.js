@@ -8,8 +8,30 @@ import webdevImg from '../assets/webdev.jpg';
 import mobiledevImg from '../assets/mobiledev.jpg';
 import platformImg from '../assets/platform.jpg';
 import SpectraDemoGif from '../components/SpectraDemoGif';
+import usePageMeta from '../hooks/usePageMeta';
+import { siteConfig } from '../config/site';
 
 const HomePage = () => {
+  usePageMeta({
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+    canonicalPath: '/',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: siteConfig.name,
+      url: siteConfig.url,
+      email: siteConfig.contactEmail,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: siteConfig.address.street,
+        postalCode: siteConfig.address.postalCode,
+        addressLocality: siteConfig.address.city,
+        addressCountry: siteConfig.address.country,
+      },
+    },
+  });
+
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   // Preload images to prevent layout shift
@@ -108,6 +130,9 @@ const HomePage = () => {
                     </Button>
                     <Button as={Link} to="/services" variant="outline-primary">
                       Custom services
+                    </Button>
+                    <Button as={Link} to="/blog/ui-testing-frameworks-modern-era" variant="link" style={{ color: 'var(--color-primary)' }}>
+                      UI testing in 2026
                     </Button>
                   </div>
                 </Col>

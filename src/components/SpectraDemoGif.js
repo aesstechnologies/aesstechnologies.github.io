@@ -9,6 +9,20 @@ export const SPECTRA_DEMO_SRC = SPECTRA_DEMO_POSTER_SRC;
 export const SPECTRA_DEMO_ALT =
   'Spectra dashboard showing YAML test suite run graph with UI, socket, and screen assert steps';
 
+const usePrefersReducedMotion = () => {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+
+  return reduced;
+};
+
 const SpectraDemoGif = ({
   className = '',
   style,
@@ -18,6 +32,7 @@ const SpectraDemoGif = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const lightboxVideoRef = useRef(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
@@ -38,7 +53,7 @@ const SpectraDemoGif = ({
     window.addEventListener('keydown', onKeyDown);
 
     const video = lightboxVideoRef.current;
-    if (video) {
+    if (video && !prefersReducedMotion) {
       video.currentTime = 0;
       video.play().catch(() => {});
     }
@@ -52,7 +67,7 @@ const SpectraDemoGif = ({
         video.currentTime = 0;
       }
     };
-  }, [close, isOpen]);
+  }, [close, isOpen, prefersReducedMotion]);
 
   return (
     <>
@@ -63,17 +78,27 @@ const SpectraDemoGif = ({
         onClick={open}
         aria-label="View Spectra demo in full screen"
       >
-        <video
-          src={SPECTRA_DEMO_VIDEO_SRC}
-          poster={SPECTRA_DEMO_POSTER_SRC}
-          className={imgClassName}
-          style={imgStyle}
-          muted
-          loop
-          playsInline
-          autoPlay
-          aria-label={alt}
-        />
+        {prefersReducedMotion ? (
+          <img
+            src={SPECTRA_DEMO_POSTER_SRC}
+            alt={alt}
+            className={imgClassName}
+            style={imgStyle}
+            loading="lazy"
+          />
+        ) : (
+          <video
+            src={SPECTRA_DEMO_VIDEO_SRC}
+            poster={SPECTRA_DEMO_POSTER_SRC}
+            className={imgClassName}
+            style={imgStyle}
+            muted
+            loop
+            playsInline
+            autoPlay
+            aria-label={alt}
+          />
+        )}
         <span className="spectra-demo-gif-hint" aria-hidden="true">
           Click to enlarge
         </span>
