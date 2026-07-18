@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBolt,
-  faDesktop,
   faEye,
   faFileCode,
   faHeartPulse,
@@ -179,23 +178,18 @@ const SpectraPage = () => {
           </Col>
           <Col xs={12} lg={6}>
             <div
-              className="spectra-demo-placeholder rounded-3 d-flex flex-column align-items-center justify-content-center"
+              className="spectra-demo rounded-3 overflow-hidden shadow-sm"
               style={{
-                aspectRatio: '16 / 10',
                 backgroundColor: 'var(--color-surface)',
-                border: '2px dashed var(--color-border)',
-                minHeight: '220px',
+                border: '1px solid var(--color-border)',
               }}
             >
-              <FontAwesomeIcon
-                icon={faDesktop}
-                size="3x"
-                className="mb-3"
-                style={{ color: 'var(--color-primary)', opacity: 0.6 }}
+              <img
+                src={`${process.env.PUBLIC_URL}/spectra-demo.gif`}
+                alt="Spectra dashboard showing YAML test suite run graph with UI, socket, and screen assert steps"
+                className="w-100 d-block"
+                loading="lazy"
               />
-              <p className="text-muted small mb-0 px-3 text-center">
-                Demo preview — replace with public/spectra-demo.gif when available
-              </p>
             </div>
           </Col>
         </Row>
