@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBolt,
-  faCode,
   faDesktop,
   faEye,
   faFileCode,
@@ -14,6 +13,7 @@ import {
   faRobot,
 } from '@fortawesome/free-solid-svg-icons';
 import { spectraConfig } from '../config/spectra';
+import SpectraDownloadButtons from '../components/SpectraDownloadButtons';
 
 const formatSek = (amount) =>
   new Intl.NumberFormat('sv-SE', {
@@ -57,8 +57,7 @@ const SectionHeading = ({ title, subtitle }) => (
 );
 
 const SpectraPage = () => {
-  const { seo, tiers, trialNote, supportEmail, portalUrl, downloadUrl, primaryCtaUrl } =
-    spectraConfig;
+  const { seo, tiers, trialNote, supportEmail, portalUrl, primaryCtaUrl } = spectraConfig;
 
   useEffect(() => {
     document.title = seo.title;
@@ -407,25 +406,7 @@ const SpectraPage = () => {
         />
         <Row className="justify-content-center">
           <Col xs={12} className="text-center">
-            {downloadUrl ? (
-              <Button
-                as="a"
-                href={downloadUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="primary"
-                size="lg"
-                style={{ backgroundColor: 'var(--color-accent)', borderColor: 'var(--color-accent)' }}
-              >
-                <FontAwesomeIcon icon={faCode} className="me-2" />
-                Download Spectra Full (Linux)
-              </Button>
-            ) : (
-              <Button variant="secondary" disabled size="lg">
-                <FontAwesomeIcon icon={faCode} className="me-2" />
-                Download Spectra Full (Linux) — Coming soon
-              </Button>
-            )}
+            <SpectraDownloadButtons size="lg" />
           </Col>
         </Row>
       </Container>

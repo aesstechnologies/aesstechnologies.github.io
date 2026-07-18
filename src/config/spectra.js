@@ -8,7 +8,7 @@ export const spectraConfig = {
   trialNote: '30-day trial on all plans · prices excl. VAT where applicable',
   supportEmail: 'hello@aesstechnologies.com',
   portalUrl: 'https://billing.stripe.com/p/login/cNi3cvavt7Zi5LyatC7N600',
-  /** Set when first GitHub Release tarball is published */
+  /** @deprecated Use /spectra-downloads.json via useSpectraDownloads */
   downloadUrl: null,
   primaryCtaUrl: 'https://buy.stripe.com/5kQ9AT3311AUfm8atC7N602',
   seo: {
