@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { spectraConfig } from '../config/spectra';
 import SpectraDownloadButtons from '../components/SpectraDownloadButtons';
-import { useSpectraDownloads } from '../hooks/useSpectraDownloads';
+import { SPECTRA_TIER_META, SPECTRA_TIER_ORDER } from '../hooks/useSpectraDownloads';
 
 const SpectraWelcomePage = () => {
   useEffect(() => {
@@ -25,8 +25,6 @@ const SpectraWelcomePage = () => {
   }, []);
 
   const { supportEmail, portalUrl } = spectraConfig;
-  const { downloads, hasDownloads } = useSpectraDownloads();
-  const linuxDownload = downloads.linux?.url;
 
   return (
     <Container className="my-5">
@@ -42,7 +40,7 @@ const SpectraWelcomePage = () => {
               Welcome to Spectra
             </Card.Title>
             <Card.Text className="lead mb-4" style={{ color: 'var(--color-textSecondary)' }}>
-              Your 30-day trial has started. Check your email for your license key.
+              Your 30-day trial has started. Follow the steps below to install and activate.
             </Card.Text>
 
             <Alert variant="success" className="text-start mb-4">
@@ -57,16 +55,17 @@ const SpectraWelcomePage = () => {
                   </small>
                 </li>
                 <li className="mb-3">
-                  <strong>Download Spectra</strong> —{' '}
-                  {hasDownloads && linuxDownload ? (
-                    <a href={linuxDownload} target="_blank" rel="noopener noreferrer">
-                      Download Spectra Full (Linux)
-                    </a>
-                  ) : (
-                    <span>
-                      <Link to="/spectra#download">Download Spectra Full (Linux)</Link> — coming soon
-                    </span>
-                  )}
+                  <strong>Download Spectra</strong> — pick the build matching your plan:
+                  <ul className="mt-2 mb-0">
+                    {SPECTRA_TIER_ORDER.map((tierId) => (
+                      <li key={tierId}>
+                        <strong>{SPECTRA_TIER_META[tierId].label}</strong> →{' '}
+                        <Link to={`/spectra#download-${tierId}`}>
+                          Download Spectra {SPECTRA_TIER_META[tierId].label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </li>
                 <li className="mb-3">
                   <strong>Install</strong> — Extract the archive, then in a terminal:
@@ -74,7 +73,7 @@ const SpectraWelcomePage = () => {
                     className="mt-2 mb-0 p-2 rounded small"
                     style={{ backgroundColor: 'var(--color-surfaceElevated)' }}
                   >
-                    npm run setup{'\n'}npm run ui
+                    ./install.sh{'\n'}npm run setup{'\n'}npm run ui
                   </pre>
                   <small className="text-muted d-block mt-1">
                     Requires Node 20+, Python 3.11+, Chromium (Playwright installs automatically).
@@ -94,7 +93,7 @@ const SpectraWelcomePage = () => {
             </Alert>
 
             <div className="d-flex gap-2 justify-content-center flex-wrap">
-              <SpectraDownloadButtons size="md" />
+              <SpectraDownloadButtons size="md" showBuildBadge />
               <Button as="a" href={`mailto:${supportEmail}`} variant="secondary">
                 Get help
               </Button>

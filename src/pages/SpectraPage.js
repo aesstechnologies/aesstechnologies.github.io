@@ -12,7 +12,7 @@ import {
   faRobot,
 } from '@fortawesome/free-solid-svg-icons';
 import { spectraConfig } from '../config/spectra';
-import SpectraDownloadButtons from '../components/SpectraDownloadButtons';
+import SpectraDownloadsSection from '../components/SpectraDownloadsSection';
 
 const formatSek = (amount) =>
   new Intl.NumberFormat('sv-SE', {
@@ -134,8 +134,8 @@ const SpectraPage = () => {
   const afterSubscribeSteps = [
     'Choose a plan and complete checkout via Stripe Payment Link.',
     'Check your email for a JWT license key from spectra-license-server.',
-    'Download the Spectra tarball (link below when the first release is published).',
-    'Run npm run setup, then npm run ui → Profile → Subscription → Activate key.',
+    'Download the build matching your plan (CLI, UI, or Full) from the section below.',
+    'Run ./install.sh or npm run setup, then npm run ui → Profile → Subscription → Activate key.',
     'Manage billing anytime via the Stripe Customer Portal.',
   ];
 
@@ -396,13 +396,9 @@ const SpectraPage = () => {
       <Container id="download" className="my-5 py-4 scroll-margin-top">
         <SectionHeading
           title="Download"
-          subtitle="Spectra Full includes CLI, UI dashboard, injector, and computer-vision regression."
+          subtitle="Choose the build that matches your subscription tier. Full includes CLI, UI dashboard, injector, and computer-vision regression."
         />
-        <Row className="justify-content-center">
-          <Col xs={12} className="text-center">
-            <SpectraDownloadButtons size="lg" />
-          </Col>
-        </Row>
+        <SpectraDownloadsSection />
       </Container>
 
       {/* Page footer links */}
