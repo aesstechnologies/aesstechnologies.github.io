@@ -57,6 +57,10 @@ export const config = {
   // API
   api: {
     baseUrl: getEnvVar('REACT_APP_API_BASE_URL', 'https://aessserver.azurewebsites.net'),
+    contactUrl: getEnvVar(
+      'REACT_APP_CONTACT_API_URL',
+      'https://license.aesstechnologies.com/email/post-email'
+    ),
   },
 
   // Mailchimp

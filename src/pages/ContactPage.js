@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import axios from 'axios';
 import { config } from '../config/env';
 import { services } from '../config/services';
+import { siteConfig } from '../config/site';
+import { trackEvent } from '../services/analytics';
 
 const ContactPage = () => {
   const [searchParams] = useSearchParams();
@@ -35,6 +37,7 @@ const ContactPage = () => {
     const email = event.target.formEmail.value;
     const message = event.target.formMessage.value;
     const phone = event.target.formPhone?.value || '';
+    const companyWebsite = event.target.companyWebsite?.value || '';
   
     if (!name || !email || !message) {
       setError('All fields are required!');
@@ -53,6 +56,7 @@ const ContactPage = () => {
       email,
       message,
       phone,
+      companyWebsite,
       ...(isQuoteRequest && {
         quoteRequest: true,
         serviceId: quoteServiceId,
@@ -61,8 +65,12 @@ const ContactPage = () => {
     };
   
     try {
-      await axios.post(`${config.api.baseUrl}/email/post-email`, payload);
+      await axios.post(config.api.contactUrl, payload);
       setSuccess(true);
+      trackEvent('contact_form_submit', {
+        quoteRequest: isQuoteRequest,
+        serviceId: quoteServiceId || undefined,
+      });
       event.target.reset();
       
       // Clear URL params after successful submission
@@ -113,41 +121,55 @@ const ContactPage = () => {
           <Form onSubmit={handleSubmit} id="contact-form">
             <Form.Group className="mb-3" controlId="formName">
               <Form.Label>Name *</Form.Label>
-              <Form.Control 
-                type="text" 
-                placeholder="Your Name" 
+              <Form.Control
+                type="text"
+                name="formName"
+                placeholder="Your Name"
                 required
                 disabled={loading}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formEmail">
               <Form.Label>Email address *</Form.Label>
-              <Form.Control 
-                type="email" 
-                placeholder="your.email@example.com" 
+              <Form.Control
+                type="email"
+                name="formEmail"
+                placeholder="your.email@example.com"
                 required
                 disabled={loading}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formPhone">
               <Form.Label>Phone (Optional)</Form.Label>
-              <Form.Control 
-                type="tel" 
-                placeholder="+46 70 123 45 67" 
+              <Form.Control
+                type="tel"
+                name="formPhone"
+                placeholder="+46 70 123 45 67"
                 disabled={loading}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formMessage">
               <Form.Label>Message *</Form.Label>
-              <Form.Control 
-                as="textarea" 
-                rows={5} 
-                placeholder={isQuoteRequest 
-                  ? "Please describe your project requirements, timeline, and any specific features you need..." 
-                  : "Your Message"
+              <Form.Control
+                as="textarea"
+                name="formMessage"
+                rows={5}
+                placeholder={
+                  isQuoteRequest
+                    ? 'Please describe your project requirements, timeline, and any specific features you need...'
+                    : 'Your Message'
                 }
                 required
                 disabled={loading}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3 visually-hidden" aria-hidden="true">
+              <Form.Label>Company website</Form.Label>
+              <Form.Control
+                type="text"
+                name="companyWebsite"
+                tabIndex={-1}
+                autoComplete="off"
               />
             </Form.Group>
             <Button 
@@ -166,9 +188,10 @@ const ContactPage = () => {
         <Col>
           <h3>Other Ways to Reach Us</h3>
           <p>
-            Email: aess.technologies@gmail.com <br />
+            Email:{' '}
+            <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+            <br />
             Phone: +46 (072) 208 37 56 <br />
-
           </p>
         </Col>
       </Row>

@@ -6,9 +6,9 @@ This document outlines the backend endpoints and functionality needed to support
 
 ### 1. Email/Contact Form Endpoint
 
-**Endpoint:** `POST /email/post-email`
+**Endpoint:** `POST https://license.aesstechnologies.com/email/post-email`
 
-**Purpose:** Handle contact form submissions and quote requests
+**Purpose:** Handle contact form submissions and quote requests via Resend (implemented on the Spectra license server).
 
 **Request Body:**
 ```json
