@@ -40,6 +40,15 @@ const marketingAssets = [
     downloadName: 'spectra-aess-linkedin-banner.svg',
     useFor: 'Link previews, LinkedIn posts, email headers',
   },
+  {
+    id: 'linkedin-company-cover',
+    title: 'LinkedIn company page cover',
+    size: '1584 × 396 PNG',
+    path: '/marketing/linkedin-company-cover.png',
+    downloadName: 'aess-linkedin-company-cover.png',
+    useFor: 'Company Page cover upload (PNG only — not the 1200×628 banner)',
+    isPng: true,
+  },
 ];
 
 const socialSnippets = [
@@ -185,8 +194,12 @@ const SpectraMarketingPage = () => {
         <Col xs={12}>
           <h2 className="h4 fw-bold mb-3">
             <FontAwesomeIcon icon={faImage} className="me-2" style={{ color: 'var(--color-accent)' }} />
-            Social banners (SVG)
+            Social banners
           </h2>
+          <p className="small mb-4" style={{ color: 'var(--color-textMuted)' }}>
+            Use the <strong>1584×396 PNG</strong> for LinkedIn Company Page cover uploads. The 1200×628
+            SVG is for link previews and feed posts only.
+          </p>
           <Row xs={1} md={3} className="g-4">
             {marketingAssets.map((asset) => (
               <Col key={asset.id}>
@@ -218,7 +231,7 @@ const SpectraMarketingPage = () => {
                       onClick={() => trackEvent('spectra_marketing_download', { asset: asset.id })}
                     >
                       <FontAwesomeIcon icon={faDownload} className="me-1" />
-                      Download SVG
+                      Download {asset.isPng ? 'PNG' : 'SVG'}
                     </Button>
                   </Card.Body>
                 </Card>
