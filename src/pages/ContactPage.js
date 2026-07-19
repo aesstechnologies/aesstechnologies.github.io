@@ -78,7 +78,12 @@ const ContactPage = () => {
         window.history.replaceState({}, '', '/contact');
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Error sending message. Please try again or contact us directly.');
+      const status = err.response?.status;
+      if (status === 429) {
+        setError('Please wait about a minute before sending another message.');
+      } else {
+        setError(err.response?.data?.message || 'Error sending message. Please try again or contact us directly.');
+      }
     }
   
     setLoading(false);
