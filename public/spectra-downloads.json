@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T10:42:14.333Z",
+  "updatedAt": "2026-07-19T10:42:26.736Z",
   "tiers": {
     "cli": {
       "version": "customer-cli-3",
@@ -50,26 +50,26 @@
       }
     },
     "full": {
-      "version": "customer-full-2",
-      "buildNumber": 2,
-      "publishedAt": "2026-07-19T10:27:53Z",
-      "sourceTag": "customer-full-2",
-      "sourceRunId": "29683314087",
+      "version": "customer-full-3",
+      "buildNumber": 3,
+      "publishedAt": "2026-07-19T10:42:25Z",
+      "sourceTag": "customer-full-3",
+      "sourceRunId": "29683747316",
       "downloads": {
         "linux": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-full-2/spectra-full-linux-20260719.tar.gz",
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-full-3/spectra-full-linux-20260719.tar.gz",
           "filename": "spectra-full-linux-20260719.tar.gz",
-          "size": 984727
+          "size": 985114
         },
         "macos": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-full-2/spectra-full-macos-20260719.tar.gz",
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-full-3/spectra-full-macos-20260719.tar.gz",
           "filename": "spectra-full-macos-20260719.tar.gz",
-          "size": 983345
+          "size": 983843
         },
         "windows": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-full-2/spectra-full-windows-20260719.zip",
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-full-3/spectra-full-windows-20260719.zip",
           "filename": "spectra-full-windows-20260719.zip",
-          "size": 1029057
+          "size": 1029590
         }
       }
     }
