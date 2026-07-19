@@ -2,7 +2,7 @@ import React from 'react';
 import LegalPage from '../components/LegalPage';
 import { spectraConfig } from '../config/spectra';
 
-const LAST_UPDATED = '18 July 2026';
+const LAST_UPDATED = '19 July 2026';
 
 const PrivacyPage = () => (
   <LegalPage
@@ -49,9 +49,14 @@ const PrivacyPage = () => (
       4. Analytics
     </h2>
     <p>
-      We use privacy-focused, self-hosted Plausible Analytics on our website. Plausible does not use
-      cookies for tracking and collects aggregated visit statistics without building individual
-      profiles for advertising.
+      We use Plausible Analytics on our website for aggregated visit statistics. Plausible does not
+      use cookies for tracking and does not build individual advertising profiles.
+    </p>
+    <p>
+      When we run advertising on LinkedIn, we use the LinkedIn Insight Tag to measure campaign
+      performance (for example website visits after an ad click). LinkedIn may set cookies and
+      process pseudonymous identifiers for this purpose. You can manage LinkedIn ad preferences in
+      your LinkedIn account settings.
     </p>
 
     <h2 className="h4 fw-semibold mt-4" style={{ color: 'var(--color-text)' }}>

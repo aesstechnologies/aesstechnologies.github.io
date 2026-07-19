@@ -85,6 +85,12 @@ Complete reference for all environment variables used in the AESS Technologies w
 1. Deploy Plausible on your server (see [Plausible Self-hosting Guide](https://plausible.io/docs/self-hosting))
 2. Update this URL to point to your instance
 
+### `REACT_APP_LINKEDIN_PARTNER_ID`
+- **Type:** String
+- **Default:** `9399154`
+- **Description:** LinkedIn Insight Tag partner ID for ad conversion tracking
+- **Example:** `REACT_APP_LINKEDIN_PARTNER_ID=9399154`
+
 ## API Configuration
 
 ### `REACT_APP_API_BASE_URL`

@@ -10,14 +10,15 @@
 
 import { config } from '../config/env';
 
-let scriptLoaded = false;
+let plausibleScriptLoaded = false;
+let linkedInTagLoaded = false;
 
 /**
  * Initialize Plausible Analytics
  * Loads the script dynamically
  */
 export const initPlausible = () => {
-  if (scriptLoaded) return;
+  if (plausibleScriptLoaded) return;
   
   const domain = config.analytics.plausibleDomain;
   const scriptUrl = config.analytics.plausibleScriptUrl;
@@ -36,7 +37,40 @@ export const initPlausible = () => {
 
   // Add to document
   document.head.appendChild(script);
-  scriptLoaded = true;
+  plausibleScriptLoaded = true;
+};
+
+/**
+ * Initialize LinkedIn Insight Tag for conversion tracking and ad attribution.
+ * @see https://www.linkedin.com/help/lms/answer/a489169
+ */
+export const initLinkedInInsightTag = () => {
+  if (linkedInTagLoaded) return;
+
+  const partnerId = config.analytics.linkedinPartnerId;
+  if (!partnerId || partnerId.includes('placeholder')) {
+    return;
+  }
+
+  window._linkedin_partner_id = partnerId;
+  window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+  window._linkedin_data_partner_ids.push(partnerId);
+
+  if (!window.lintrk) {
+    window.lintrk = function lintrk(a, b) {
+      window.lintrk.q.push([a, b]);
+    };
+    window.lintrk.q = [];
+  }
+
+  const firstScript = document.getElementsByTagName('script')[0];
+  const insightScript = document.createElement('script');
+  insightScript.type = 'text/javascript';
+  insightScript.async = true;
+  insightScript.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+  firstScript.parentNode.insertBefore(insightScript, firstScript);
+
+  linkedInTagLoaded = true;
 };
 
 /**
@@ -64,6 +98,7 @@ export const trackPageView = () => {
 
 const analyticsService = {
   initPlausible,
+  initLinkedInInsightTag,
   trackEvent,
   trackPageView,
 };
