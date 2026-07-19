@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T19:32:31.597Z",
+  "updatedAt": "2026-07-19T19:32:43.987Z",
   "tiers": {
     "cli": {
       "version": "customer-cli-7",
@@ -26,26 +26,26 @@
       }
     },
     "ui": {
-      "version": "customer-ui-6",
-      "buildNumber": 6,
-      "publishedAt": "2026-07-19T18:40:01Z",
-      "sourceTag": "customer-ui-6",
-      "sourceRunId": "29699010932",
+      "version": "customer-ui-7",
+      "buildNumber": 7,
+      "publishedAt": "2026-07-19T19:32:42Z",
+      "sourceTag": "customer-ui-7",
+      "sourceRunId": "29700763471",
       "downloads": {
         "linux": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-6/spectra-ui-linux-20260719.tar.gz",
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-7/spectra-ui-linux-20260719.tar.gz",
           "filename": "spectra-ui-linux-20260719.tar.gz",
-          "size": 133927
+          "size": 143721
         },
         "macos": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-6/spectra-ui-macos-20260719.tar.gz",
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-7/spectra-ui-macos-20260719.tar.gz",
           "filename": "spectra-ui-macos-20260719.tar.gz",
-          "size": 132545
+          "size": 142226
         },
         "windows": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-6/spectra-ui-windows-20260719.zip",
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-7/spectra-ui-windows-20260719.zip",
           "filename": "spectra-ui-windows-20260719.zip",
-          "size": 170507
+          "size": 183270
         }
       }
     },
