@@ -1,27 +1,27 @@
 {
-  "updatedAt": "2026-07-18T18:23:23.063Z",
+  "updatedAt": "2026-07-19T10:27:21.704Z",
   "tiers": {
     "cli": {
-      "version": "spectra-cli-1",
-      "buildNumber": 1,
-      "publishedAt": "2026-07-18T18:22:57Z",
-      "sourceTag": "customer-cli-1",
-      "sourceRunId": "29655699595",
+      "version": "customer-cli-2",
+      "buildNumber": 2,
+      "publishedAt": "2026-07-19T10:27:20Z",
+      "sourceTag": "customer-cli-2",
+      "sourceRunId": "29683314087",
       "downloads": {
         "linux": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/spectra-cli-1/spectra-cli-linux-20260718.tar.gz",
-          "filename": "spectra-cli-linux-20260718.tar.gz",
-          "size": 67179
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-cli-2/spectra-cli-linux-20260719.tar.gz",
+          "filename": "spectra-cli-linux-20260719.tar.gz",
+          "size": 72476
         },
         "macos": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/spectra-cli-1/spectra-cli-macos-20260718.tar.gz",
-          "filename": "spectra-cli-macos-20260718.tar.gz",
-          "size": 66103
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-cli-2/spectra-cli-macos-20260719.tar.gz",
+          "filename": "spectra-cli-macos-20260719.tar.gz",
+          "size": 71144
         },
         "windows": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/spectra-cli-1/spectra-cli-windows-20260718.zip",
-          "filename": "spectra-cli-windows-20260718.zip",
-          "size": 92320
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-cli-2/spectra-cli-windows-20260719.zip",
+          "filename": "spectra-cli-windows-20260719.zip",
+          "size": 103245
         }
       }
     },
