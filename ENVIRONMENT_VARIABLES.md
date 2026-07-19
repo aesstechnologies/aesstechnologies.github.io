@@ -96,13 +96,21 @@ Complete reference for all environment variables used in the AESS Technologies w
 ### `REACT_APP_API_BASE_URL`
 - **Type:** String
 - **Default:** `https://aessserver.azurewebsites.net`
-- **Description:** Base URL for your backend API
+- **Description:** Base URL for legacy backend API (Stripe checkout helper)
 - **Example:** `REACT_APP_API_BASE_URL=https://aessserver.azurewebsites.net`
+
+**Used for:**
+- Stripe checkout session creation (legacy services checkout)
+
+### `REACT_APP_CONTACT_API_URL`
+- **Type:** String
+- **Default:** `https://license.aesstechnologies.com/email/post-email`
+- **Description:** Contact form endpoint (Resend via license server)
+- **Example:** `REACT_APP_CONTACT_API_URL=https://license.aesstechnologies.com/email/post-email`
 
 **Used for:**
 - Contact form submissions
 - Quote requests
-- Stripe checkout session creation
 
 ## Mailchimp Configuration
 
