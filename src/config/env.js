@@ -51,6 +51,7 @@ export const config = {
   analytics: {
     plausibleDomain: getEnvVar('REACT_APP_PLAUSIBLE_DOMAIN', 'aesstechnologies.com'),
     plausibleScriptUrl: getEnvVar('REACT_APP_PLAUSIBLE_SCRIPT_URL', 'https://plausible.io/js/script.js'),
+    linkedinPartnerId: getEnvVar('REACT_APP_LINKEDIN_PARTNER_ID', '9399154'),
   },
 
   // API
