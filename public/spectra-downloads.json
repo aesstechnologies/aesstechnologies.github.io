@@ -1,27 +1,27 @@
 {
-  "updatedAt": "2026-07-27T12:49:06.253Z",
+  "updatedAt": "2026-08-12T17:47:11.289Z",
   "tiers": {
     "cli": {
-      "version": "customer-cli-9",
-      "buildNumber": 9,
-      "publishedAt": "2026-07-27T12:48:37Z",
-      "sourceTag": "customer-cli-9",
-      "sourceRunId": "30267356353",
+      "version": "customer-cli-14",
+      "buildNumber": 14,
+      "publishedAt": "2026-08-12T17:47:09Z",
+      "sourceTag": "customer-cli-14",
+      "sourceRunId": "31624204250",
       "downloads": {
         "linux": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-cli-9/spectra-cli-linux-20260727.tar.gz",
-          "filename": "spectra-cli-linux-20260727.tar.gz",
-          "size": 77181
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-cli-14/spectra-cli-linux-20260812.tar.gz",
+          "filename": "spectra-cli-linux-20260812.tar.gz",
+          "size": 93146
         },
         "macos": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-cli-9/spectra-cli-macos-20260727.tar.gz",
-          "filename": "spectra-cli-macos-20260727.tar.gz",
-          "size": 78370
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-cli-14/spectra-cli-macos-20260812.tar.gz",
+          "filename": "spectra-cli-macos-20260812.tar.gz",
+          "size": 94560
         },
         "windows": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-cli-9/spectra-cli-windows-20260727.zip",
-          "filename": "spectra-cli-windows-20260727.zip",
-          "size": 114793
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-cli-14/spectra-cli-windows-20260812.zip",
+          "filename": "spectra-cli-windows-20260812.zip",
+          "size": 139886
         }
       }
     },
