@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-23T12:32:44.120Z",
+  "updatedAt": "2026-08-23T12:32:57.584Z",
   "tiers": {
     "cli": {
       "version": "customer-cli-20",
@@ -26,26 +26,26 @@
       }
     },
     "ui": {
-      "version": "customer-ui-19",
-      "buildNumber": 19,
-      "publishedAt": "2026-08-22T10:27:51Z",
-      "sourceTag": "customer-ui-19",
-      "sourceRunId": "32567596501",
+      "version": "customer-ui-20",
+      "buildNumber": 20,
+      "publishedAt": "2026-08-23T12:32:56Z",
+      "sourceTag": "customer-ui-20",
+      "sourceRunId": "32639630490",
       "downloads": {
         "linux": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-19/spectra-ui-linux-20260822.tar.gz",
-          "filename": "spectra-ui-linux-20260822.tar.gz",
-          "size": 182711
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-20/spectra-ui-linux-20260823.tar.gz",
+          "filename": "spectra-ui-linux-20260823.tar.gz",
+          "size": 190887
         },
         "macos": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-19/spectra-ui-macos-20260822.tar.gz",
-          "filename": "spectra-ui-macos-20260822.tar.gz",
-          "size": 182117
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-20/spectra-ui-macos-20260823.tar.gz",
+          "filename": "spectra-ui-macos-20260823.tar.gz",
+          "size": 190560
         },
         "windows": {
-          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-19/spectra-ui-windows-20260822.zip",
-          "filename": "spectra-ui-windows-20260822.zip",
-          "size": 235056
+          "url": "https://github.com/aesstechnologies/aesstechnologies.github.io/releases/download/customer-ui-20/spectra-ui-windows-20260823.zip",
+          "filename": "spectra-ui-windows-20260823.zip",
+          "size": 245309
         }
       }
     },
